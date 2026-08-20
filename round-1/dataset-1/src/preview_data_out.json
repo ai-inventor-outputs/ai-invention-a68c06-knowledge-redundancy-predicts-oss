@@ -1,0 +1,42 @@
+{
+  "datasets": [
+    {
+      "dataset": "github_oss_commits",
+      "examples": [
+        {
+          "input": "{\"repo_id\": \"11ty/eleventy\", \"repo_name\": \"eleventy\", \"author_login\": \"Zach Leatherman\", \"is_founder\": true, \"file_count\": 22, \"commit_sequence_num\": 0, \"author_total_commits\": 1837, \"repo_total_commi...",
+          "output": "founder",
+          "metadata_repo_id": "11ty/eleventy",
+          "metadata_author": "Zach Leatherman",
+          "metadata_is_founder": true,
+          "metadata_commit_sha": "00ad9192605d5d501de6aae193701c5a2297ef2c",
+          "metadata_timestamp": "2017-11-26T23:27:28-06:00",
+          "metadata_task_type": "classification",
+          "metadata_n_classes": 2
+        },
+        {
+          "input": "{\"repo_id\": \"11ty/eleventy\", \"repo_name\": \"eleventy\", \"author_login\": \"Zach Leatherman\", \"is_founder\": true, \"file_count\": 12, \"commit_sequence_num\": 1, \"author_total_commits\": 1837, \"repo_total_commi...",
+          "output": "founder",
+          "metadata_repo_id": "11ty/eleventy",
+          "metadata_author": "Zach Leatherman",
+          "metadata_is_founder": true,
+          "metadata_commit_sha": "3ad744e450993526c94567146f59d4a91a06c775",
+          "metadata_timestamp": "2017-11-27T21:46:36-06:00",
+          "metadata_task_type": "classification",
+          "metadata_n_classes": 2
+        },
+        {
+          "input": "{\"repo_id\": \"11ty/eleventy\", \"repo_name\": \"eleventy\", \"author_login\": \"Zach Leatherman\", \"is_founder\": true, \"file_count\": 4, \"commit_sequence_num\": 2, \"author_total_commits\": 1837, \"repo_total_commit...",
+          "output": "founder",
+          "metadata_repo_id": "11ty/eleventy",
+          "metadata_author": "Zach Leatherman",
+          "metadata_is_founder": true,
+          "metadata_commit_sha": "3bce7b5b3c45f78cf82f6a772b45d6729a988290",
+          "metadata_timestamp": "2017-11-27T21:55:05-06:00",
+          "metadata_task_type": "classification",
+          "metadata_n_classes": 2
+        }
+      ]
+    }
+  ]
+}
