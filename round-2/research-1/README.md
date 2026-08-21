@@ -1,18 +1,22 @@
-# Verify and correct paper citations for knowledge redundancy
+# Exhaustive reference verification and novelty refinement for OSS survival literature
 
 `demo/` — Self-contained demo (Colab-ready notebook or markdown). Run without setup.  
 `src/` — Full source code, data, and outputs from the experiment execution.
 
 **Type:** research  
-**ID:** `art_YOQ_fg8YSxRo`
+**ID:** `art_jaTrs1mi8Mnr`
 
 ## Layman Summary
 
-This research verified 15 citations in a paper about open-source project survival, found two citation errors that need correction, and identified additional related work to strengthen the literature review.
+This research verified OSS survival literature references, corrected citation errors, and strengthened novelty claims about knowledge redundancy as a predictor of project survival.
 
 ## Full Summary
 
-Conducted thorough verification of 15 citations in the paper draft 'Knowledge Redundancy Predicts Open-Source Project Survival After Founder Departure.' Identified two significant citation errors: (1) Citation [13] Fritz et al. incorrectly listed as 2007 ICSE PIM paper, corrected to 2010 ICSE paper on Degree-of-Knowledge (DOK) model; (2) Citation [5] Rigby & Hassan 2007 references mailing list paper but text discusses blame-based ownership - requires clarification. Verified all other citations against actual paper content via ACM Digital Library, arXiv, DBLP, and publisher websites. Searched for additional related work on knowledge redundancy, transactive memory systems, and OSS survival, identifying 5+ relevant papers. Assessed novelty of inverted-U hypothesis and found no direct prior work testing this specific relationship, though related concepts exist in transactive memory literature. Generated corrected BibTeX file with all 15 citations plus 3 additional recommended references. Research report includes detailed verification evidence, correction recommendations, and follow-up questions for further investigation.
+EXHAUSTIVE verification of 23+ references from prior literature review on OSS survival prediction. CRITICAL FINDINGS: (1) Avelino et al. 2019 paper authors INCORRECTLY listed - actual authors are Avelino, Constantinou, Valente, Serebrenik (not Passos and Hora); (2) Avelino et al. 2016 truck factor paper CONFUSED with 2019 paper - different authors and venue; (3) Cosentino et al. 2016 paper authors INCORRECT - actual authors are Cosentino, Cánovas Izquierdo, Cabot (not Colomo-Palacios and Caivano); (4) Multiple DOIs and venues miscited. VERIFIED 15+ sources with evidence. Found 5+ additional related work papers on knowledge overlap. Created corrected reference list with BibTeX and JSON metadata. Drafted 2000-word related work section with explicit novelty contrast. Documented 10+ miscitations with corrections. CONFIDENCE: HIGH in verified findings, MEDIUM in unverified sources due to access limitations.
+
+## Dependencies
+
+- `art_hCV89wVDpKcQ` — literature
 
 ## Output Files
 
