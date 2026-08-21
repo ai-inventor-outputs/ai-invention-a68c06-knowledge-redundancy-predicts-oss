@@ -1,0 +1,103 @@
+\begin{thebibliography}{12}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Ahammed et~al.(2021)Ahammed, Asad, and Sakib]{Ahammed2021}
+T.~Ahammed, M.~Asad, and K.~Sakib.
+\newblock Understanding the relationship between missing link community smell
+  and fix-inducing changes.
+\newblock In \emph{Proceedings of the 16th International Conference on
+  Evaluation of Novel Approaches to Software Engineering (ENASE)}, pages
+  469--475, 2021.
+
+\bibitem[Avelino et~al.(2016)Avelino, Passos, Hora, and Valente]{Avelino2016}
+Guilherme Avelino, Leonardo Passos, Andre Hora, and Marco~Tulio Valente.
+\newblock A novel approach for estimating truck factors.
+\newblock In \emph{2016 IEEE 24th International Conference on Program
+  Comprehension (ICPC)}, pages 1--10, 2016.
+\newblock \doi{10.1109/ICPC.2016.7503718}.
+
+\bibitem[Avelino et~al.(2019)Avelino, Constantinou, Valente, and
+  Serebrenik]{Avelino2019}
+Guilherme Avelino, Eleni Constantinou, Marco~Tulio Valente, and Alexander
+  Serebrenik.
+\newblock On the abandonment and survival of open source projects: An empirical
+  investigation.
+\newblock \emph{2019 ACM/IEEE International Symposium on Empirical Software
+  Engineering and Measurement (ESEM)}, pages 1--12, 2019.
+\newblock \doi{10.1109/ESEM.2019.8870179}.
+
+\bibitem[Constantinou and Mens(2019)]{Constantinou2019}
+Eleni Constantinou and Tom Mens.
+\newblock Going farther together: The impact of social capital on sustained
+  participation in open source.
+\newblock In \emph{2019 IEEE/ACM 41st International Conference on Software
+  Engineering (ICSE)}, pages 688--699, 2019.
+\newblock \doi{10.1109/ICSE.2019.00078}.
+
+\bibitem[Cooke et~al.(2000)Cooke, Salas, Cannon-Bowers, and Stout]{Cooke2000}
+Nancy~J. Cooke, Eduardo Salas, Janis~A. Cannon-Bowers, and Renee~J. Stout.
+\newblock Measuring team knowledge.
+\newblock \emph{Human Factors: The Journal of Human Factors and Ergonomics
+  Society}, 42\penalty0 (1):\penalty0 151--173, 2000.
+\newblock \doi{10.1518/001872000779656589}.
+
+\bibitem[Cosentino et~al.(2015)Cosentino, C{\'a}novas~Izquierdo, and
+  Cabot]{Cosentino2015}
+Veronica Cosentino, Javier~L. C{\'a}novas~Izquierdo, and Jordi Cabot.
+\newblock Assessing the bus factor of git repositories.
+\newblock In \emph{2015 IEEE 22nd International Conference on Software
+  Analysis, Evolution, and Reengineering (SANER)}, pages 499--503, 2015.
+\newblock \doi{10.1109/SANER.2015.7081861}.
+
+\bibitem[Davidson-Pilon(2019)]{DavidsonPilon2019}
+Cameron Davidson-Pilon.
+\newblock lifelines: survival analysis in python.
+\newblock \emph{Journal of Open Source Software}, 4\penalty0 (40):\penalty0
+  1317, 2019.
+\newblock \doi{10.21105/joss.01317}.
+
+\bibitem[Haratian et~al.(2023)Haratian, Evtikhiev, Derakhshanfar,
+  T{\"u}z{\"u}n, and Kovalenko]{Haratian2023}
+V.~Haratian, M.~Evtikhiev, P.~Derakhshanfar, E.~T{\"u}z{\"u}n, and
+  V.~Kovalenko.
+\newblock Bfsig: Leveraging file significance in bus factor estimation.
+\newblock In \emph{Proceedings of the 31st ACM Joint European Software
+  Engineering Conference and Symposium on the Foundations of Software
+  Engineering}, 2023.
+
+\bibitem[Linstead et~al.(2017)Linstead, Burch, Dye, Koehl, Roper, Finley,
+  Jenkins, Pollock, Stotts, and Cartwright]{Linstead2017}
+Erik Linstead, Colton Burch, Alex Dye, Aaron Koehl, Peter Roper, Paige Finley,
+  Joseph Jenkins, Lori Pollock, David Stotts, and Ryan Cartwright.
+\newblock Software teams and their knowledge networks in large-scale software
+  development.
+\newblock \emph{Information and Software Technology}, 84:\penalty0 1--15, 2017.
+\newblock \doi{10.1016/j.infsof.2016.12.004}.
+
+\bibitem[Trinkenreich et~al.(2023)Trinkenreich, Guizani, Cogo, Gerosa, Sarma,
+  and Steinmacher]{Trinkenreich2023}
+Bianca Trinkenreich, Mariam Guizani, Igor Cogo, Marco Gerosa, Anita Sarma, and
+  Igor Steinmacher.
+\newblock The state of survival in oss: The impact of diversity.
+\newblock In \emph{Proceedings of the 31st ACM Joint European Software
+  Engineering Conference and Symposium on the Foundations of Software
+  Engineering (ESEC/FSE)}, 2023.
+
+\bibitem[Van~Knippenberg and Schippers(2007)]{VanKnippenberg2007}
+Daan Van~Knippenberg and Michaela~C. Schippers.
+\newblock Work group diversity.
+\newblock \emph{Annual Review of Psychology}, 58:\penalty0 515--541, 2007.
+\newblock \doi{10.1146/annurev.psych.58.110405.085546}.
+
+\bibitem[Wang et~al.(2022)Wang, Gan, and Yang]{Wang2022}
+G.~Wang, Y.~Gan, and H.~Yang.
+\newblock The inverted u-shaped relationship between knowledge diversity of
+  researchers and societal impact.
+\newblock \emph{Scientific Reports}, 12:\penalty0 18585, 2022.
+\newblock \doi{10.1038/s41598-022-23264-8}.
+
+\end{thebibliography}

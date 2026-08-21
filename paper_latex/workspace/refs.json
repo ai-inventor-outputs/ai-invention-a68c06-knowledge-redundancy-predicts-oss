@@ -1,0 +1,23 @@
+{
+  "references": [
+    {"title": "On the abandonment and survival of open source projects: An empirical investigation", "author": "Avelino", "year": 2019},
+    {"title": "A novel approach for estimating Truck Factors", "author": "Avelino", "year": 2016},
+    {"title": "Assessing the bus factor of Git repositories", "author": "Cosentino", "year": 2015},
+    {"title": "Truck Factor Comparison Study", "author": "SBCARS", "year": 2016},
+    {"title": "The State of Survival in OSS: The Impact of Diversity", "author": "Trinkenreich", "year": 2023},
+    {"title": "Measuring Team Knowledge", "author": "Cooke", "year": 2000},
+    {"title": "Work group diversity", "author": "Van Knippenberg", "year": 2007},
+    {"title": "The inverted U-shaped relationship between knowledge diversity of researchers and societal impact", "author": "Wang", "year": 2022, "doi": "10.1038/s41598-022-23264-8"},
+    {"title": "Software teams and their knowledge networks in large-scale software development", "author": "Linstead", "year": 2017},
+    {"title": "The death spiral of open source projects: A post-mortem analysis of pull request workflow dynamics", "author": "Kaushik", "year": 2026},
+    {"title": "Going Farther Together: The Impact of Social Capital on Sustained Participation in Open Source", "author": "Constantinou", "year": 2019},
+    {"title": "Understanding the Relationship between Missing Link Community Smell and Fix-inducing Changes", "author": "Ahammed", "year": 2021},
+    {"title": "Degree of Authorship in Git Repositories", "author": "Avelino", "year": 2016, "arxiv": "1604.06766"},
+    {"title": "File Significance in Bus Factor", "author": "Haratian", "year": 2023},
+    {"title": "Software teams and their knowledge networks", "author": "Klein", "year": 2017},
+    {"title": "Regression models and life-tables", "author": "Cox", "year": 1972},
+    {"title": "Applied Survival Analysis: Regression Modeling of Time-to-Event Data", "author": "Hosmer", "year": 2008},
+    {"title": "BFSig: Leveraging File Significance in Bus Factor Estimation", "author": "Haratian", "year": 2023},
+    {"title": "lifelines: survival analysis in Python", "author": "Davidson-Pilon", "year": 2019, "doi": "10.21105/joss.01317"}
+  ]
+}
