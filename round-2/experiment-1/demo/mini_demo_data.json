@@ -1,52 +1,65 @@
 {
   "datasets": [
     {
-      "dataset": "oss_survival_experiment",
+      "dataset": "github_oss_survival",
       "examples": [
         {
-          "input": "{\"repo_id\": \"EbookFoundation/free-programming-books\", \"founder\": \"Victor Felder\", \"departure_date\": \"2015-04-03T21:32:26+02:00\", \"kr\": 0.1191924562660132, \"kr_squared\": 0.01420684163072547}",
-          "output": "1",
-          "predict_baseline": "1",
-          "predict_our_method": "0",
-          "metadata_repo_id": "EbookFoundation/free-programming-books",
-          "metadata_founder": "Victor Felder",
-          "metadata_kr": 0.1191924562660132,
-          "metadata_survived": 1,
-          "metadata_survival_time": 7
+          "input": "{\"knowledge_redundancy_score\": 0.25, \"stars\": 150, \"language_encoded\": 1, \"total_commits\": 800, \"top_contributors_count\": 3, \"pre_departure_commits_per_month\": 20.0, \"post_departure_commits_per_month\": 18.0}",
+          "output": "survived",
+          "metadata_has_departure": true,
+          "metadata_repo_id": "org/repo-1",
+          "metadata_language": "Python"
         },
         {
-          "input": "{\"repo_id\": \"BuilderIO/builder\", \"founder\": \"Steve Sewell\", \"departure_date\": \"2023-07-31T16:22:16-04:00\", \"kr\": 0.9690965320456273, \"kr_squared\": 0.9391480884228616}",
-          "output": "1",
-          "predict_baseline": "1",
-          "predict_our_method": "0",
-          "metadata_repo_id": "BuilderIO/builder",
-          "metadata_founder": "Steve Sewell",
-          "metadata_kr": 0.9690965320456273,
-          "metadata_survived": 1,
-          "metadata_survival_time": 0
+          "input": "{\"knowledge_redundancy_score\": 0.35, \"stars\": 500, \"language_encoded\": 2, \"total_commits\": 1200, \"top_contributors_count\": 5, \"pre_departure_commits_per_month\": 35.0, \"post_departure_commits_per_month\": 30.0}",
+          "output": "survived",
+          "metadata_has_departure": true,
+          "metadata_repo_id": "org/repo-2",
+          "metadata_language": "JavaScript"
         },
         {
-          "input": "{\"repo_id\": \"BuilderIO/mitosis\", \"founder\": \"Steve Sewell\", \"departure_date\": \"2025-04-03T14:46:18-07:00\", \"kr\": 0.5764429264724755, \"kr_squared\": 0.33228644748015185}",
-          "output": "1",
-          "predict_baseline": "1",
-          "predict_our_method": "1",
-          "metadata_repo_id": "BuilderIO/mitosis",
-          "metadata_founder": "Steve Sewell",
-          "metadata_kr": 0.5764429264724755,
-          "metadata_survived": 1,
-          "metadata_survival_time": 0
+          "input": "{\"knowledge_redundancy_score\": 0.45, \"stars\": 300, \"language_encoded\": 1, \"total_commits\": 950, \"top_contributors_count\": 4, \"pre_departure_commits_per_month\": 25.0, \"post_departure_commits_per_month\": 2.0}",
+          "output": "died",
+          "metadata_has_departure": true,
+          "metadata_repo_id": "org/repo-3",
+          "metadata_language": "Python"
+        },
+        {
+          "input": "{\"knowledge_redundancy_score\": 0.55, \"stars\": 800, \"language_encoded\": 3, \"total_commits\": 1500, \"top_contributors_count\": 6, \"pre_departure_commits_per_month\": 40.0, \"post_departure_commits_per_month\": 5.0}",
+          "output": "died",
+          "metadata_has_departure": true,
+          "metadata_repo_id": "org/repo-4",
+          "metadata_language": "Java"
+        },
+        {
+          "input": "{\"knowledge_redundancy_score\": 0.65, \"stars\": 1200, \"language_encoded\": 2, \"total_commits\": 2000, \"top_contributors_count\": 8, \"pre_departure_commits_per_month\": 50.0, \"post_departure_commits_per_month\": 45.0}",
+          "output": "survived",
+          "metadata_has_departure": true,
+          "metadata_repo_id": "org/repo-5",
+          "metadata_language": "JavaScript"
+        },
+        {
+          "input": "{\"knowledge_redundancy_score\": 0.75, \"stars\": 200, \"language_encoded\": 1, \"total_commits\": 600, \"top_contributors_count\": 2, \"pre_departure_commits_per_month\": 15.0, \"post_departure_commits_per_month\": 1.0}",
+          "output": "died",
+          "metadata_has_departure": true,
+          "metadata_repo_id": "org/repo-6",
+          "metadata_language": "Python"
+        },
+        {
+          "input": "{\"knowledge_redundancy_score\": 0.30, \"stars\": 400, \"language_encoded\": 3, \"total_commits\": 1100, \"top_contributors_count\": 4, \"pre_departure_commits_per_month\": 30.0, \"post_departure_commits_per_month\": 28.0}",
+          "output": "survived",
+          "metadata_has_departure": true,
+          "metadata_repo_id": "org/repo-7",
+          "metadata_language": "Java"
+        },
+        {
+          "input": "{\"knowledge_redundancy_score\": 0.50, \"stars\": 600, \"language_encoded\": 2, \"total_commits\": 1300, \"top_contributors_count\": 5, \"pre_departure_commits_per_month\": 32.0, \"post_departure_commits_per_month\": 3.0}",
+          "output": "died",
+          "metadata_has_departure": true,
+          "metadata_repo_id": "org/repo-8",
+          "metadata_language": "JavaScript"
         }
       ]
     }
-  ],
-  "metadata": {
-    "experiment_summary": {
-      "n_repos": 3,
-      "n_departures": 3,
-      "n_survived": 3,
-      "survival_rate": 1.0,
-      "mean_kr": 0.554910638261372,
-      "kr_range": [0.1191924562660132, 0.9690965320456273]
-    }
-  }
+  ]
 }

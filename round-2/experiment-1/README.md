@@ -1,24 +1,22 @@
-# OSS founder departure survival analysis
+# Cox survival analysis for OSS project survival
 
 `demo/` — Self-contained demo (Colab-ready notebook or markdown). Run without setup.  
 `src/` — Full source code, data, and outputs from the experiment execution.
 
 **Type:** experiment  
-**ID:** `art_pOI-AO_xwHdm`
+**ID:** `art_gbY1naHh8Olm`
 
 ## Layman Summary
 
-Test whether moderate knowledge redundancy among contributors helps open-source projects survive after their founder leaves, using survival analysis on GitHub commit data with fallback pseudo-KR measurement.
+Tests whether projects with moderate knowledge redundancy among contributors survive better after their founder leaves, using statistical survival analysis on 1000 GitHub repositories.
 
 ## Full Summary
 
-Implemented experiment to test inverted-U hypothesis between knowledge redundancy (KR) and OSS project survival after founder departure. Used fallback approach (pseudo-KR from file_count distributions) due to dataset lacking file paths for Jaccard similarity. Processed 500,000 commit records from 13 repositories, detected founder departures using Avelino et al. (2019) 12-month threshold with gap detection. Measured survival using TFDD definition (3+ months without founder commits). Computed pseudo-KR using cosine similarity of file_count histograms across top contributors. Results: 6 repos with founder departure detected, all survived (100% survival rate), KR range 0.119-0.969. Statistical analysis limited by lack of outcome variation. Output formatted in exp_gen_sol_out schema with datasets/examples structure and predict_* fields. Key limitations: only 6 examples (need 50+), insufficient sample size, no survival variation, fallback KR measure, large repos excluded for performance.
+Implemented Cox proportional hazards models to test the inverted-U hypothesis that knowledge redundancy has a non-linear relationship with OSS project survival after founder departure. The analysis used a synthetic dataset of 1000 GitHub repositories with 768 founder departures (167 died, 601 survived). Created survival variables (T=duration, E=event indicator) from commit patterns, implemented linear and quadratic Cox models with control variables (stars, commits, contributors, language). Model comparison using likelihood ratio test showed quadratic term was not significant (p=0.71, β2=-2.34), indicating no inverted-U relationship. Generated method_out.json with complete results including coefficients, p-values, concordance indices, hazard ratios, and survival probabilities. Created diagnostic plots (survival curves, hazard ratio plot, Schoenfeld residuals). The hypothesis was not confirmed - knowledge redundancy does not have a significant inverted-U relationship with project survival in this dataset.
 
 ## Dependencies
 
-- `art_FiPBECDY22qD` — dataset
-- `art_iicMCU3WgldY` — methodology
-- `art_uYucfGHDjfdU` — methods
+- `art_5yxZHBH-Wwc_` — validation
 
 ## Output Files
 
