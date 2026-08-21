@@ -1,0 +1,101 @@
+\begin{thebibliography}{14}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Avelino et~al.(2019)Avelino, Constantinou, Valente, and
+  Serebrenik]{Avelino2019}
+Guilherme Avelino, Eleni Constantinou, Marco~Tulio Valente, and Alexander
+  Serebrenik.
+\newblock On the abandonment and survival of open source projects: An empirical
+  investigation.
+\newblock \emph{2019 ACM/IEEE International Symposium on Empirical Software
+  Engineering and Measurement (ESEM)}, pages 1--12, 2019.
+
+\bibitem[Choudhary et~al.(2023)]{Choudhary2023}
+A.~Choudhary et~al.
+\newblock The state of survival in oss: The impact of diversity.
+\newblock In \emph{Proceedings of the 31st ACM Joint European Software
+  Engineering Conference and Symposium on the Foundations of Software
+  Engineering (ESEC/FSE) - Student Research Competition}, 2023.
+
+\bibitem[Coelho et~al.(2020)Coelho, Valente, and Silva]{Coelho2020}
+Jailton Coelho, Marco~Tulio Valente, and Luiz~Leite Silva.
+\newblock Is this github project maintained?
+\newblock \emph{Empirical Software Engineering}, 25\penalty0 (6):\penalty0
+  4954--4990, 2020.
+
+\bibitem[Cosentino et~al.(2015)Cosentino, Izquierdo, and Cabot]{Cosentino2015}
+Ver{\'o}nica Cosentino, Javier Luis~C{\'a}rcel Izquierdo, and Jordi Cabot.
+\newblock Assessing the bus factor of git repositories.
+\newblock In \emph{2015 IEEE 22nd International Conference on Software
+  Analysis, Evolution, and Reengineering (SANER)}, pages 499--503. IEEE, 2015.
+
+\bibitem[Ferreira et~al.(2020)Ferreira, Silva, and Valente]{Ferreira2020}
+Fabio Ferreira, Luis~Leite Silva, and Marco~Tulio Valente.
+\newblock Turnover in open-source projects: The case of core developers.
+\newblock In \emph{Proceedings of the XXXIV Brazilian Symposium on Software
+  Engineering (SBES)}, 2020.
+
+\bibitem[Ferreira et~al.(2019)Ferreira, Avelino, Valente, and
+  Ferreira]{Ferreira2019}
+Mauricio Ferreira, Guilherme Avelino, Marco~Tulio Valente, and Keco A.~M.
+  Ferreira.
+\newblock A comparative study of algorithms for estimating truck factor.
+\newblock In \emph{CBSOFT 2019}, 2019.
+
+\bibitem[Fritz et~al.(2010)Fritz, Ou, Murphy, and Murphy-Hill]{Fritz2010}
+Thomas Fritz, Jason Ou, Gail~C. Murphy, and Emerson Murphy-Hill.
+\newblock A degree-of-knowledge model to capture source code familiarity.
+\newblock In \emph{Proceedings of the 32nd ACM/IEEE International Conference on
+  Software Engineering (ICSE)}, pages 385--394. ACM, 2010.
+
+\bibitem[Jabrayilzade et~al.(2022)Jabrayilzade, Evtikhiev, T{\"u}z{\"u}n, and
+  Kovalenko]{Jabrayilzade2022}
+Elgun Jabrayilzade, Mikhail Evtikhiev, Eray T{\"u}z{\"u}n, and Vladimir
+  Kovalenko.
+\newblock Bus factor in practice.
+\newblock In \emph{2022 IEEE/ACM 44th International Conference on Software
+  Engineering: Software Engineering in Practice (ICSE-SEIP)}, pages 299--310.
+  IEEE, 2022.
+
+\bibitem[Miller et~al.(2025)]{Miller2025}
+Brent Miller et~al.
+\newblock Write access provisioning and organizational ownership in open source
+  software projects: Exploring the impact on project novelty and survival.
+\newblock \emph{Research Policy}, 54\penalty0 (2):\penalty0 105284, 2025.
+
+\bibitem[Piccolo et~al.(2025)]{Piccolo2025}
+Sergio~Arnaldo Piccolo et~al.
+\newblock Fast and accurate heuristics for bus-factor estimation.
+\newblock \emph{arXiv preprint arXiv:2508.09828}, 2025.
+
+\bibitem[Qiu et~al.(2019)Qiu, Nolte, Brown, Serebrenik, and Vasilescu]{Qiu2019}
+Huashan Qiu, Alexander Nolte, Andrew~R. Brown, Alexander Serebrenik, and Bogdan
+  Vasilescu.
+\newblock Going farther together: The impact of social capital on sustained
+  participation in open source.
+\newblock In \emph{2019 IEEE/ACM 41st International Conference on Software
+  Engineering (ICSE)}, pages 688--699. IEEE, 2019.
+
+\bibitem[Ren and Argote(2011)]{Ren2011}
+Yuqing Ren and Linda Argote.
+\newblock Transactive memory systems 1985-2010: An integrative framework of key
+  dimensions.
+\newblock \emph{Academy of Management Annals}, 5\penalty0 (1):\penalty0
+  189--229, 2011.
+
+\bibitem[Rigby and Hassan(2007)]{Rigby2007}
+Peter~C. Rigby and Ahmed~E. Hassan.
+\newblock What can oss mailing lists tell us?
+\newblock In \emph{2007 IEEE International Working Conference on Mining
+  Software Repositories (MSR)}. IEEE, 2007.
+
+\bibitem[Wegner(1985)]{Wegner1985}
+Daniel~M. Wegner.
+\newblock Transactive memory: A contemporary analysis of the group mind.
+\newblock \emph{Advances in Social Cognition}, 2:\penalty0 185--208, 1985.
+
+\end{thebibliography}
