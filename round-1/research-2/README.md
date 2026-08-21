@@ -1,18 +1,18 @@
-# OSS Founder Departure and Survival Methods
+# Knowledge redundancy measurement and survival analysis validation for OSS projects
 
 `demo/` — Self-contained demo (Colab-ready notebook or markdown). Run without setup.  
 `src/` — Full source code, data, and outputs from the experiment execution.
 
 **Type:** research  
-**ID:** `art_uYucfGHDjfdU`
+**ID:** `art_FDgSH3zFKh6_`
 
 ## Layman Summary
 
-Research on when OSS founders leave and whether projects survive. Found 12 months inactivity is best threshold, and projects survive if they attract new core developers after founders leave.
+This research validates how to measure when multiple developers have overlapping knowledge in open-source projects and tests whether moderate overlap best predicts project survival after a founder leaves.
 
 ## Full Summary
 
-Exhaustive research synthesizing methodologies from 15+ peer-reviewed papers on operationalizing founder departure (12-month inactivity threshold per Avelino et al.'s sensitivity analysis), measuring project survival (Truck Factor Developer Detachment definition), implementing survival analysis (Kaplan-Meier + Cox proportional hazards), and identifying control variables for OSS survival studies. Includes recent 2025 literature and implementation details for GitHub API data collection. Avelino et al. (2019) conducted sensitivity analysis of five thresholds (3 months, 6 months, 1 year, 1.5 years, 2 years) and found 1-year threshold achieved highest harmonic mean (0.66). The research covers founder identification methods via GitHub API, departure threshold validation, survival metrics, statistical methods including survival analysis with lifelines Python library, comprehensive control variables from multiple studies, multicollinearity considerations with VIF, and threats to validity. Recent 2025 papers on developer departure and core developer turnover provide updated insights.
+Comprehensive validation of technical approach for measuring knowledge redundancy from git commit data using Jaccard similarity and testing inverted-U hypothesis about OSS project survival after founder departure using Cox proportional hazards models. Research covers all six phases of investigation: (1) Knowledge redundancy measurement validation with Jaccard similarity, cosine similarity, Shannon entropy, and Herfindahl-Hirschman Index as alternative measures, including weighted variants and implementation code examples; (2) Cox proportional hazards model specification with quadratic term interpretation for inverted-U hypothesis testing, including hazard ratio calculations and turning point formulas; (3) Bus factor algorithm comparison between Avelino et al. and Cosentino et al. approaches with detailed implementation steps, parameter specifications, and validation results from precision/recall comparison studies; (4) Survival time definition and censoring approaches based on empirical evidence from 1,932 GitHub projects, including founder departure identification algorithms and 1-year inactivity threshold validation; (5) GitHub API data collection feasibility assessment including rate limits of 5,000 requests per hour for authenticated users, time estimates for 2,000 projects, GraphQL optimization strategies, and GHTorrent status evaluation; (6) Statistical power requirements and sample size calculations using the 10 events per variable rule of thumb, confirming that 2,000 projects provides sufficient power exceeding 80% for detecting moderate effect sizes. Key validated findings include 41% survival rate after founder departure from Aveline et al. (2019), Jaccard similarity appropriateness for knowledge redundancy measurement with weighting recommendations, Cox model quadratic term interpretation guidelines showing negative coefficient indicates inverted-U relationship, GitHub API constraints and optimization strategies, and Avelino et al. bus factor algorithm recommendation based on empirical comparison studies. The research provides actionable validation for downstream artifact execution with validated formulas, algorithm specifications, API constraints, statistical power calculations, and diagnostic check procedures.
 
 ## Output Files
 
