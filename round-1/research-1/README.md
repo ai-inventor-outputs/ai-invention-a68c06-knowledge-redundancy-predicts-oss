@@ -1,18 +1,18 @@
-# Knowledge Redundancy and Bus Factor from Git Data
+# OSS Survival Literature Review: Knowledge Redundancy and Bus Factor
 
 `demo/` — Self-contained demo (Colab-ready notebook or markdown). Run without setup.  
 `src/` — Full source code, data, and outputs from the experiment execution.
 
 **Type:** research  
-**ID:** `art_iicMCU3WgldY`
+**ID:** `art_hCV89wVDpKcQ`
 
 ## Layman Summary
 
-A comprehensive literature review of methods to measure knowledge distribution in open-source projects using git history, including algorithms for bus factor and knowledge redundancy with validation evidence from empirical studies.
+This research reviews OSS survival literature, finding bus factor critical, and that developer knowledge overlap may follow an inverted-U where too little or too much redundancy harms survival.
 
 ## Full Summary
 
-This research provides a comprehensive synthesis of state-of-the-art methods for measuring knowledge distribution in open-source projects from git repository data. The study reviews 15+ key papers (2010-2025) and identifies: (1) Avelino's Degree of Authorship (DOA) algorithm as the most validated bus factor method [1, 2], (2) Jaccard similarity as the primary approach for knowledge redundancy measurement [3], (3) Validation evidence from 1,932 GitHub projects showing 16% abandonment rate and 41% survival rate [2], (4) Recent advances in graph-theoretic approaches [4] and multimodal measurements [5], (5) Implementation tools and practical guidance. The report includes exact formulas, algorithm pseudocode, validation metrics, and a recommended measurement framework for hypothesis testing.
+Comprehensive literature review examining OSS project survival prediction, bus factor measurement, knowledge redundancy constructs, and methodological approaches. Synthesized findings from 25+ key papers spanning software engineering, organizational psychology, and survival analysis. Key findings: (1) 16% of popular OSS projects experience abandonment, 41% survive through new maintainer adoption; (2) Bus factor measurement validated with 77-100% precision across multiple algorithms; (3) Knowledge redundancy is a novel construct not directly measured in OSS literature; (4) Cox proportional hazards models standard for survival analysis; (5) Inverted-U hypothesis theoretically grounded in organizational psychology literature but untested in OSS context. Identified 5+ methodological gaps and 3+ alternative theoretical frameworks (community smells, death spiral, social capital). Provides methodological recommendations for measuring knowledge redundancy using Jaccard similarity on developer file ownership vectors, survival definitions, control variables, and statistical analysis plans.
 
 ## Output Files
 
