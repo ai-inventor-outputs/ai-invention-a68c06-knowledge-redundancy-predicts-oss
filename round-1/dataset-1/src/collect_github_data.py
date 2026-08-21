@@ -32,7 +32,7 @@ def setup_logging():
     import logging
     logging.basicConfig(
         level=logging.INFO,
-        format='{time:HH:mm:ss}|{level:<7}|{message}',
+        format='%(asctime)s|%(levelname)s|%(message)s',
         handlers=[
             logging.StreamHandler(),
             logging.FileHandler('logs/run.log')
