@@ -1,40 +1,40 @@
 {
   "datasets": [
     {
-      "dataset": "github_oss_commits",
+      "dataset": "github_oss_survival",
       "examples": [
         {
-          "input": "{\"repo_id\": \"11ty/eleventy\", \"repo_name\": \"eleventy\", \"author_login\": \"Zach Leatherman\", \"is_founder\": true, \"file_count\": 22, \"commit_sequence_num\": 0, \"author_total_commits\": 1837, \"repo_total_commits\": 2283, \"commit_timestamp\": \"2017-11-26T23:27:28-06:00\"}",
-          "output": "founder",
-          "metadata_repo_id": "11ty/eleventy",
-          "metadata_author": "Zach Leatherman",
-          "metadata_is_founder": true,
-          "metadata_commit_sha": "00ad9192605d5d501de6aae193701c5a2297ef2c",
-          "metadata_timestamp": "2017-11-26T23:27:28-06:00",
-          "metadata_task_type": "classification",
-          "metadata_n_classes": 2
+          "input": "{\"knowledge_redundancy_score\": 0.26705976741823034, \"stars\": 304, \"language_encoded\": 1, \"total_commits\": 1255, \"top_contributors_count\": 3, \"pre_departure_commits_per_month\": 23.41178035410031, \"post_departure_commits_per_month\": 21.281999894979812}",
+          "output": "survived",
+          "metadata_repo_id": "org/repo-1",
+          "metadata_founder": "founder_user_0",
+          "metadata_is_departed": true,
+          "metadata_has_departure": true,
+          "metadata_language": "javascript",
+          "metadata_stars": 304,
+          "metadata_redundancy_score": 0.26705976741823034
         },
         {
-          "input": "{\"repo_id\": \"11ty/eleventy\", \"repo_name\": \"eleventy\", \"author_login\": \"Zach Leatherman\", \"is_founder\": true, \"file_count\": 12, \"commit_sequence_num\": 1, \"author_total_commits\": 1837, \"repo_total_commits\": 2283, \"commit_timestamp\": \"2017-11-27T21:46:36-06:00\"}",
-          "output": "founder",
-          "metadata_repo_id": "11ty/eleventy",
-          "metadata_author": "Zach Leatherman",
-          "metadata_is_founder": true,
-          "metadata_commit_sha": "3ad744e450993526c94567146f59d4a91a06c775",
-          "metadata_timestamp": "2017-11-27T21:46:36-06:00",
-          "metadata_task_type": "classification",
-          "metadata_n_classes": 2
+          "input": "{\"knowledge_redundancy_score\": 0.285414378610915, \"stars\": 158, \"language_encoded\": 3, \"total_commits\": 1820, \"top_contributors_count\": 5, \"pre_departure_commits_per_month\": 10.72354459527886, \"post_departure_commits_per_month\": 11.955444076819917}",
+          "output": "survived",
+          "metadata_repo_id": "org/repo-2",
+          "metadata_founder": "founder_user_1",
+          "metadata_is_departed": true,
+          "metadata_has_departure": true,
+          "metadata_language": "go",
+          "metadata_stars": 158,
+          "metadata_redundancy_score": 0.285414378610915
         },
         {
-          "input": "{\"repo_id\": \"11ty/eleventy\", \"repo_name\": \"eleventy\", \"author_login\": \"Zach Leatherman\", \"is_founder\": true, \"file_count\": 4, \"commit_sequence_num\": 2, \"author_total_commits\": 1837, \"repo_total_commits\": 2283, \"commit_timestamp\": \"2017-11-27T21:55:05-06:00\"}",
-          "output": "founder",
-          "metadata_repo_id": "11ty/eleventy",
-          "metadata_author": "Zach Leatherman",
-          "metadata_is_founder": true,
-          "metadata_commit_sha": "3bce7b5b3c45f78cf82f6a772b45d6729a988290",
-          "metadata_timestamp": "2017-11-27T21:55:05-06:00",
-          "metadata_task_type": "classification",
-          "metadata_n_classes": 2
+          "input": "{\"knowledge_redundancy_score\": 0.3950057084440945, \"stars\": 2386, \"language_encoded\": 1, \"total_commits\": 566, \"top_contributors_count\": 3, \"pre_departure_commits_per_month\": 21.98795295900659, \"post_departure_commits_per_month\": 23.291729661932536}",
+          "output": "survived",
+          "metadata_repo_id": "org/repo-3",
+          "metadata_founder": "founder_user_2",
+          "metadata_is_departed": true,
+          "metadata_has_departure": true,
+          "metadata_language": "javascript",
+          "metadata_stars": 2386,
+          "metadata_redundancy_score": 0.3950057084440945
         }
       ]
     }

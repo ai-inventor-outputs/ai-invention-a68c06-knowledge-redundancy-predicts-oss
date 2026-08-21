@@ -1,105 +1,112 @@
 #!/usr/bin/env python3
-"""Load and standardize GitHub repository dataset for OSS survival study."""
+# /// script
+# requires-python = ">=3.12"
+# dependencies = [
+#     "numpy",
+# ]
+# ///
 
-from pathlib import Path
+"""
+Transform GitHub OSS survival dataset to exp_sel_data_out.json schema.
+
+Each repository becomes an example with:
+- input: JSON string of features (knowledge_redundancy, stars, language, etc.)
+- output: survival status (survived/died/no_departure)
+- metadata: repo information
+"""
+
 import json
-from collections import defaultdict
+import numpy as np
+from pathlib import Path
+from typing import Any
 
-# Load a LARGER sample of the dataset for better coverage
-print("Loading GitHub dataset (expanded sample)...")
+def load_dataset(path: str) -> list[dict[str, Any]]:
+    """Load dataset from JSON file."""
+    with open(path) as f:
+        return json.load(f)
 
-# Load from the full dataset but limit to first 500k records (~15-20 repos)
-with open("temp/datasets/github_final_full.json", "r") as f:
-    data = json.load(f)
+def encode_language(language: str) -> int:
+    """Encode language as numeric value."""
+    languages = {
+        'python': 0, 'javascript': 1, 'java': 2, 'go': 3,
+        'rust': 4, 'typescript': 5, 'c++': 6, 'ruby': 7
+    }
+    return languages.get(language, -1)
 
-# Take a larger sample - first 500k records
-data = data[:500000]
-print(f"Loaded {len(data)} commit records (expanded sample)")
+def create_example(repo: dict[str, Any]) -> dict[str, Any]:
+    """Create an example from a repository record."""
+    
+    # Extract features for input
+    features = {
+        'knowledge_redundancy_score': repo['knowledge_redundancy']['redundancy_score'],
+        'stars': repo['metadata']['stars'],
+        'language_encoded': encode_language(repo['metadata']['language']),
+        'total_commits': repo['metadata']['total_commits'],
+        'top_contributors_count': len(repo['knowledge_redundancy']['top_contributors']),
+    }
+    
+    # Add pre-departure metrics if available
+    if repo['survival'].get('has_departure'):
+        features['pre_departure_commits_per_month'] = repo['survival']['pre_departure_commits_per_month']
+        features['post_departure_commits_per_month'] = repo['survival']['post_departure_commits_per_month']
+        output = repo['survival']['survival_status']
+    else:
+        features['pre_departure_commits_per_month'] = 0
+        features['post_departure_commits_per_month'] = 0
+        output = 'no_departure'
+    
+    # Create example
+    example = {
+        'input': json.dumps(features),
+        'output': output,
+        'metadata_repo_id': repo['repo_id'],
+        'metadata_founder': repo['founder']['founder'],
+        'metadata_is_departed': repo['founder']['is_departed'],
+        'metadata_has_departure': repo['survival']['has_departure'],
+        'metadata_language': repo['metadata']['language'],
+        'metadata_stars': repo['metadata']['stars'],
+        'metadata_redundancy_score': repo['knowledge_redundancy']['redundancy_score'],
+    }
+    
+    return example
 
-# Group data by repository
-repos = defaultdict(list)
-for record in data:
-    repo_id = record["repo_id"]
-    repos[repo_id].append(record)
+def main():
+    # Load the dataset
+    dataset_path = Path('data_out.json')
+    if not dataset_path.exists():
+        print(f"Error: {dataset_path} not found")
+        return
+    
+    repos = load_dataset(str(dataset_path))
+    print(f"Loaded {len(repos)} repositories")
+    
+    # Create examples
+    examples = [create_example(repo) for repo in repos]
+    
+    # Group by dataset (single dataset for this collection)
+    output = {
+        'datasets': [
+            {
+                'dataset': 'github_oss_survival',
+                'examples': examples
+            }
+        ]
+    }
+    
+    # Save output
+    output_path = Path('full_data_out.json')
+    with open(output_path, 'w') as f:
+        json.dump(output, f, indent=2)
+    
+    print(f"Saved {len(examples)} examples to {output_path}")
+    
+    # Print statistics
+    outputs = [ex['output'] for ex in examples]
+    unique_outputs = set(outputs)
+    print(f"Output classes: {unique_outputs}")
+    for cls in unique_outputs:
+        count = sum(1 for o in outputs if o == cls)
+        print(f"  {cls}: {count}")
 
-print(f"Found {len(repos)} repositories")
-
-# Create examples from commit data
-examples = []
-
-for repo_id, commits in repos.items():
-    # Sort commits by timestamp
-    commits_sorted = sorted(commits, key=lambda x: x["commit_timestamp"] if x["commit_timestamp"] else "")
-
-    # Get repo metadata
-    repo_name = commits[0]["repo_name"] if commits else ""
-    repo_owner = commits[0]["repo_owner"] if commits else ""
-
-    # Calculate contributor patterns (pre-compute)
-    contributor_commits = defaultdict(int)
-    for commit in commits_sorted:
-        author = commit["author_login"]
-        if author:
-            contributor_commits[author] += 1
-
-    # Create examples - each commit is an example
-    for i, commit in enumerate(commits_sorted):
-        author = commit["author_login"]
-        is_founder = commit["is_founder"]
-
-        # Create input features
-        input_features = {
-            "repo_id": repo_id,
-            "repo_name": repo_name,
-            "author_login": author,
-            "is_founder": is_founder,
-            "file_count": commit["file_count"],
-            "commit_sequence_num": i,
-            "author_total_commits": contributor_commits.get(author, 0),
-            "repo_total_commits": len(commits),
-            "commit_timestamp": commit["commit_timestamp"]
-        }
-
-        # Output: founder vs contributor
-        output = "founder" if is_founder else "contributor"
-
-        example = {
-            "input": json.dumps(input_features),
-            "output": output,
-            "metadata_repo_id": repo_id,
-            "metadata_author": author,
-            "metadata_is_founder": is_founder,
-            "metadata_commit_sha": commit["commit_sha"],
-            "metadata_timestamp": commit["commit_timestamp"],
-            "metadata_task_type": "classification",
-            "metadata_n_classes": 2
-        }
-
-        examples.append(example)
-
-print(f"Created {len(examples)} examples")
-
-# Group by dataset
-output = {
-    "datasets": [
-        {
-            "dataset": "github_oss_commits",
-            "examples": examples
-        }
-    ]
-}
-
-# Save to full_data_out.json
-output_path = Path("full_data_out.json")
-with open(output_path, "w") as f:
-    json.dump(output, f, indent=2)
-
-print(f"Saved {len(examples)} examples to {output_path}")
-
-# Print sample
-print("\nSample example:")
-if examples:
-    sample = examples[0]
-    print(f"  Input: {sample['input'][:200]}...")
-    print(f"  Output: {sample['output']}")
-    print(f"  Metadata: repo_id={sample['metadata_repo_id']}, author={sample['metadata_author']}")
+if __name__ == '__main__':
+    main()

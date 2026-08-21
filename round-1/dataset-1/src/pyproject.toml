@@ -1,13 +1,7 @@
 [project]
-name = "github-oss-dataset"
+name = "github-oss-survival-dataset"
 version = "1.0.0"
 requires-python = ">=3.12"
 dependencies = [
-    "ijson==3.3.0",
-    "pandas==2.2.2",
-    "requests==2.32.3",
+    "numpy==2.0.2",
 ]
-
-[build-system]
-requires = ["hatchling"]
-build-backend = "hatchling.build"

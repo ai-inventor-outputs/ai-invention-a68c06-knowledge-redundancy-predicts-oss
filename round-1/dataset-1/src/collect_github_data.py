@@ -1,292 +1,341 @@
 #!/usr/bin/env python3
 """
-Collect GitHub repository data for OSS survival study.
-Collects commit histories, file modifications, and contributor metadata.
+GitHub OSS Survival Dataset Collection Script
+
+This script collects GitHub repository data to measure knowledge redundancy
+and founder departure survival. It uses the GitHub REST API via PyGithub.
+
+Requirements:
+- PyGithub: pip install PyGithub
+- pandas, numpy, tqdm: pip install pandas numpy tqdm
+- GitHub Token: Set GITHUB_TOKEN environment variable
+
+Usage:
+    python collect_github_data.py --output data_out.json --max-repos 100
+
+Without a GitHub token, the script is limited to 60 requests/hour.
+With a token, it can make 5000 requests/hour.
 """
 
-from loguru import logger
-from pathlib import Path
+from github import Github
+import os
 import json
-import sys
 import time
-import asyncio
-import aiohttp
 from datetime import datetime, timedelta
-from typing import Dict, List, Any, Optional
-import random
+from pathlib import Path
+import argparse
+from collections import defaultdict
+from itertools import combinations
 
-logger.remove()
-logger.add(sys.stdout, level="INFO", format="{time:HH:mm:ss}|{level:<7}|{message}")
-logger.add("logs/run.log", rotation="30 MB", level="DEBUG")
+def setup_logging():
+    """Setup basic logging."""
+    import logging
+    logging.basicConfig(
+        level=logging.INFO,
+        format='{time:HH:mm:ss}|{level:<7}|{message}',
+        handlers=[
+            logging.StreamHandler(),
+            logging.FileHandler('logs/run.log')
+        ]
+    )
+    return logging.getLogger(__name__)
 
-class GitHubDataCollector:
-    """Collect GitHub repository data using REST API."""
-    
-    def __init__(self, token: Optional[str] = None):
-        self.token = token
-        self.base_url = "https://api.github.com"
-        self.headers = {}
-        if token:
-            self.headers["Authorization"] = f"token {token}"
-        self.headers["Accept"] = "application/vnd.github.v3+json"
-        self.rate_limit_remaining = 5000
-        self.rate_limit_reset = 0
-        
-    async def _make_request(self, session: aiohttp.ClientSession, url: str, params: Dict = None) -> Optional[Dict]:
-        """Make API request with rate limit handling."""
-        while True:
-            try:
-                async with session.get(url, headers=self.headers, params=params) as response:
-                    # Update rate limit info
-                    if "X-RateLimit-Remaining" in response.headers:
-                        self.rate_limit_remaining = int(response.headers["X-RateLimit-Remaining"])
-                    if "X-RateLimit-Reset" in response.headers:
-                        self.rate_limit_reset = int(response.headers["X-RateLimit-Reset"])
-                    
-                    if response.status == 200:
-                        return await response.json()
-                    elif response.status == 403:
-                        # Rate limited
-                        reset_time = self.rate_limit_reset - time.time()
-                        if reset_time > 0:
-                            logger.warning(f"Rate limited. Waiting {reset_time:.0f}s")
-                            await asyncio.sleep(min(reset_time + 5, 60))
-                            continue
-                        else:
-                            await asyncio.sleep(60)
-                            continue
-                    elif response.status == 404:
-                        logger.warning(f"Not found: {url}")
-                        return None
-                    else:
-                        logger.error(f"API error {response.status}: {url}")
-                        return None
-            except Exception as e:
-                logger.error(f"Request failed: {e}")
-                await asyncio.sleep(5)
-                continue
-    
-    async def search_repositories(self, session: aiohttp.ClientSession, min_stars: int = 100, 
-                                  created_before: str = "2024-08-20", pushed_after: str = "2024-02-20",
-                                  per_page: int = 100, max_repos: int = 2000) -> List[Dict]:
-        """Search for repositories matching criteria."""
-        repos = []
-        page = 1
-        
-        # Search query
-        query = f"stars:>{min_stars} created:<{created_before} pushed:>{pushed_after}"
-        # Add language filter for popular OSS languages
-        languages = ["Python", "JavaScript", "Java", "Go", "TypeScript", "C++", "Ruby"]
-        
-        logger.info(f"Searching for repositories with query: {query}")
-        
-        for lang in languages[:2]:  # Start with 2 languages to manage API budget
-            if len(repos) >= max_repos:
-                break
-                
-            lang_query = f"{query} language:{lang}"
-            logger.info(f"Searching language: {lang}")
-            
-            while len(repos) < max_repos:
-                params = {
-                    "q": lang_query,
-                    "sort": "stars",
-                    "order": "desc",
-                    "per_page": per_page,
-                    "page": page
-                }
-                
-                url = f"{self.base_url}/search/repositories"
-                data = await self._make_request(session, url, params)
-                
-                if not data or "items" not in data:
-                    break
-                
-                items = data["items"]
-                if not items:
-                    break
-                
-                repos.extend(items)
-                logger.info(f"Collected {len(repos)} repositories so far")
-                
-                if len(items) < per_page:
-                    break
-                page += 1
-                
-                # Check rate limit
-                if self.rate_limit_remaining < 10:
-                    wait_time = max(0, self.rate_limit_reset - time.time()) + 5
-                    logger.warning(f"Low rate limit. Waiting {wait_time:.0f}s")
-                    await asyncio.sleep(wait_time)
-        
-        return repos[:max_repos]
-    
-    async def get_contributors(self, session: aiohttp.ClientSession, repo_full_name: str) -> List[Dict]:
-        """Get repository contributors."""
-        url = f"{self.base_url}/repos/{repo_full_name}/contributors"
-        params = {"per_page": 100}
-        contributors = []
-        
-        page = 1
-        while True:
-            params["page"] = page
-            data = await self._make_request(session, url, params)
-            if not data:
-                break
-            contributors.extend(data)
-            if len(data) < 100:
-                break
-            page += 1
-            await asyncio.sleep(0.1)  # Small delay
-        
-        return contributors
-    
-    async def get_commits(self, session: aiohttp.ClientSession, repo_full_name: str, 
-                         since: Optional[str] = None, max_commits: int = 500) -> List[Dict]:
-        """Get repository commits."""
-        url = f"{self.base_url}/repos/{repo_full_name}/commits"
-        params = {"per_page": 100}
-        if since:
-            params["since"] = since
-        
-        commits = []
-        page = 1
-        
-        while len(commits) < max_commits:
-            params["page"] = page
-            data = await self._make_request(session, url, params)
-            if not data:
-                break
-            commits.extend(data)
-            if len(data) < 100:
-                break
-            page += 1
-            await asyncio.sleep(0.1)
-        
-        return commits[:max_commits]
-    
-    async def get_commit_details(self, session: aiohttp.ClientSession, repo_full_name: str, 
-                                 commit_sha: str) -> Optional[Dict]:
-        """Get detailed commit information including file modifications."""
-        url = f"{self.base_url}/repos/{repo_full_name}/commits/{commit_sha}"
-        return await self._make_request(session, url)
-    
-    async def collect_repo_data(self, session: aiohttp.ClientSession, repo: Dict) -> Optional[Dict]:
-        """Collect comprehensive data for a single repository."""
-        repo_full_name = repo["full_name"]
-        logger.info(f"Processing {repo_full_name}")
-        
+logger = setup_logging()
+
+def search_repositories(g, queries, max_per_query=200):
+    """Search for repositories matching queries."""
+    repos = []
+    for query in queries:
         try:
-            # Get contributors
-            contributors = await self.get_contributors(session, repo_full_name)
+            logger.info(f"Searching: {query}")
+            results = g.search_repositories(query=query, sort='stars', order='desc')
+            count = 0
+            for repo in results:
+                if count >= max_per_query:
+                    break
+                repos.append({
+                    'full_name': repo.full_name,
+                    'stars': repo.stargazers_count,
+                    'language': repo.language,
+                    'created_at': repo.created_at.isoformat(),
+                    'default_branch': repo.default_branch
+                })
+                count += 1
+            logger.info(f"Found {count} repos for query: {query}")
+        except Exception as e:
+            logger.error(f"Error searching query '{query}': {e}")
+    return repos
+
+def validate_repository(repo):
+    """Validate repository meets criteria."""
+    try:
+        # Check if archived
+        if repo.archived:
+            return False, "archived"
+        
+        # Check commit count
+        commits = repo.get_commits()
+        if commits.totalCount < 50:
+            return False, f"too few commits: {commits.totalCount}"
+        
+        # Check contributor count
+        contributors = repo.get_contributors()
+        if contributors.totalCount < 3:
+            return False, f"too few contributors: {contributors.totalCount}"
+        
+        # Check activity span (simplified check)
+        first_commit = list(commits)[:1]
+        if first_commit:
+            first_date = first_commit[0].commit.author.date
+            last_commit = list(repo.get_commits()[:1])[0]
+            last_date = last_commit.commit.author.date
+            months_active = (last_date - first_date).days / 30
+            if months_active < 24:
+                return False, f"insufficient activity span: {months_active:.1f} months"
+        
+        return True, "valid"
+    except Exception as e:
+        return False, f"validation error: {e}"
+
+def collect_commit_data(repo, max_commits=300):
+    """Collect commit data for a repository."""
+    commits_data = []
+    try:
+        commits = repo.get_commits()
+        commit_list = list(commits)[:max_commits]
+        
+        for commit in commit_list:
+            if commit.author:
+                commit_info = {
+                    'sha': commit.sha,
+                    'author': commit.author.login if commit.author else None,
+                    'date': commit.commit.author.date.isoformat(),
+                    'files': [f.filename for f in commit.files] if commit.files else [],
+                    'additions': commit.stats.additions if commit.stats else 0,
+                    'deletions': commit.stats.deletions if commit.stats else 0
+                }
+                commits_data.append(commit_info)
+    except Exception as e:
+        logger.error(f"Error collecting commits for {repo.full_name}: {e}")
+    
+    return commits_data
+
+def identify_founder(repo_data):
+    """Identify founder based on first 6 months of activity."""
+    commits = repo_data.get('commits', [])
+    if not commits:
+        return None
+    
+    repo_created = datetime.fromisoformat(repo_data['metadata']['created_date'])
+    six_months_later = repo_created + timedelta(days=180)
+    
+    # Count commits per author in first 6 months
+    author_commits = defaultdict(int)
+    for commit in commits:
+        commit_date = datetime.fromisoformat(commit['date'])
+        if commit_date <= six_months_later and commit['author']:
+            author_commits[commit['author']] += 1
+    
+    if author_commits:
+        founder = max(author_commits, key=author_commits.get)
+        return founder
+    return None
+
+def detect_departure(repo_data, founder):
+    """Detect if founder has departed (12+ months inactivity)."""
+    if not founder:
+        return {'founder': None, 'departure_date': None, 'is_departed': False}
+    
+    founder_commits = [c for c in repo_data.get('commits', []) if c['author'] == founder]
+    if not founder_commits:
+        return {'founder': founder, 'departure_date': None, 'is_departed': False}
+    
+    last_commit_date = max(datetime.fromisoformat(c['date']) for c in founder_commits)
+    now = datetime.now()
+    
+    if (now - last_commit_date).days >= 365:
+        return {
+            'founder': founder,
+            'departure_date': last_commit_date.isoformat(),
+            'is_departed': True
+        }
+    else:
+        return {
+            'founder': founder,
+            'departure_date': None,
+            'is_departed': False
+        }
+
+def compute_survival_metrics(repo_data, departure_info):
+    """Compute pre/post departure activity and survival status."""
+    if not departure_info or not departure_info['is_departed']:
+        return {'has_departure': False}
+    
+    departure_date = datetime.fromisoformat(departure_info['departure_date'])
+    commits = repo_data.get('commits', [])
+    
+    # Pre-departure: 12 months before departure
+    pre_start = departure_date - timedelta(days=365)
+    pre_commits = [c for c in commits 
+                   if pre_start <= datetime.fromisoformat(c['date']) <= departure_date]
+    
+    # Post-departure: 12 months after departure
+    post_end = departure_date + timedelta(days=365)
+    post_commits = [c for c in commits
+                    if departure_date <= datetime.fromisoformat(c['date']) <= post_end]
+    
+    pre_rate = len(pre_commits) / 12.0  # commits per month
+    post_rate = len(post_commits) / 12.0
+    
+    # Survival: post-departure activity >= 50% of pre-departure
+    survival_status = 'survived' if post_rate >= (pre_rate * 0.5) else 'died'
+    
+    return {
+        'has_departure': True,
+        'pre_departure_commits_per_month': pre_rate,
+        'post_departure_commits_per_month': post_rate,
+        'survival_status': survival_status,
+        'months_observed_post': min(12, len(post_commits) // 30) if post_commits else 0
+    }
+
+def compute_knowledge_redundancy(repo_data, top_n=5):
+    """Compute pairwise Jaccard similarity among top contributors."""
+    commits = repo_data.get('commits', [])
+    
+    # Get top contributors by commit count
+    author_counts = defaultdict(int)
+    for commit in commits:
+        if commit['author']:
+            author_counts[commit['author']] += 1
+    
+    top_contributors = sorted(author_counts, key=author_counts.get, reverse=True)[:top_n]
+    
+    # Get file sets for each contributor
+    contributor_files = {}
+    for author in top_contributors:
+        files = set()
+        for commit in commits:
+            if commit['author'] == author:
+                files.update(commit['files'])
+        contributor_files[author] = files
+    
+    # Compute pairwise Jaccard similarity
+    jaccard_scores = []
+    for a, b in combinations(top_contributors, 2):
+        intersection = len(contributor_files[a] & contributor_files[b])
+        union = len(contributor_files[a] | contributor_files[b])
+        if union > 0:
+            jaccard_scores.append(intersection / union)
+    
+    redundancy_score = sum(jaccard_scores) / len(jaccard_scores) if jaccard_scores else 0
+    
+    return {
+        'top_contributors': top_contributors,
+        'pairwise_jaccard_scores': jaccard_scores,
+        'redundancy_score': redundancy_score
+    }
+
+def main():
+    parser = argparse.ArgumentParser(description='Collect GitHub OSS survival data')
+    parser.add_argument('--output', default='data_out.json', help='Output file path')
+    parser.add_argument('--max-repos', type=int, default=100, help='Maximum repos to collect')
+    parser.add_argument('--token', help='GitHub token (or set GITHUB_TOKEN env var)')
+    args = parser.parse_args()
+    
+    # Get GitHub token
+    token = args.token or os.environ.get('GITHUB_TOKEN')
+    if not token:
+        logger.warning("No GitHub token provided. Rate limit: 60 requests/hour")
+        logger.warning("Set GITHUB_TOKEN environment variable or use --token")
+    
+    # Initialize GitHub client
+    g = Github(token) if token else Github()
+    
+    # Create output directory
+    Path('logs').mkdir(exist_ok=True)
+    
+    # Search queries
+    queries = [
+        'stars:>=100 created:<2022-01-01 language:python',
+        'stars:>=100 created:<2022-01-01 language:javascript',
+        'stars:>=100 created:<2022-01-01 language:java',
+        'stars:>=100 created:<2022-01-01 language:go',
+    ]
+    
+    # Step 1: Search repositories
+    logger.info("Step 1: Searching for repositories...")
+    candidates = search_repositories(g, queries, max_per_query=50)
+    logger.info(f"Found {len(candidates)} candidate repositories")
+    
+    # Step 2: Validate and collect data
+    logger.info("Step 2: Validating and collecting data...")
+    collected_data = []
+    
+    for i, repo_info in enumerate(candidates[:args.max_repos]):
+        try:
+            repo = g.get_repo(repo_info['full_name'])
             
-            # Get commits (last 2 years)
-            two_years_ago = (datetime.now() - timedelta(days=730)).isoformat()
-            commits = await self.get_commits(session, repo_full_name, since=two_years_ago)
+            # Validate
+            is_valid, reason = validate_repository(repo)
+            if not is_valid:
+                logger.info(f"Skipping {repo_info['full_name']}: {reason}")
+                continue
             
-            # Get detailed commit info for top contributors (limit to save API calls)
-            top_contributors = contributors[:10] if contributors else []
-            commit_details = []
+            # Collect commits
+            commits = collect_commit_data(repo, max_commits=300)
             
-            for commit in commits[:50]:  # Limit to 50 commits per repo
-                commit_data = await self.get_commit_details(session, repo_full_name, commit["sha"])
-                if commit_data and "files" in commit_data:
-                    commit_details.append({
-                        "sha": commit_data["sha"],
-                        "author": commit_data["commit"]["author"]["name"] if commit_data["commit"]["author"] else None,
-                        "author_login": commit_data["author"]["login"] if commit_data.get("author") else None,
-                        "timestamp": commit_data["commit"]["author"]["date"] if commit_data["commit"]["author"] else None,
-                        "message": commit_data["commit"]["message"],
-                        "files": [f["filename"] for f in commit_data["files"]],
-                        "file_count": len(commit_data["files"])
-                    })
-            
-            # Identify founder (earliest contributor or most commits in first 6 months)
-            founder = None
-            if contributors:
-                # Sort by contributions
-                sorted_contribs = sorted(contributors, key=lambda x: x.get("contributions", 0), reverse=True)
-                founder = sorted_contribs[0]["login"] if sorted_contribs else None
-            
-            return {
-                "repo_id": repo_full_name,
-                "repo_name": repo["name"],
-                "repo_owner": repo["owner"]["login"],
-                "repo_stars": repo["stargazers_count"],
-                "repo_forks": repo["forks_count"],
-                "repo_language": repo.get("language"),
-                "repo_created": repo["created_at"],
-                "repo_last_push": repo["pushed_at"],
-                "contributors": [{"login": c["login"], "contributions": c["contributions"]} for c in contributors[:50]],
-                "founder": founder,
-                "commits": commit_details,
-                "commit_count": len(commits)
+            repo_data = {
+                'repo_id': repo_info['full_name'],
+                'metadata': {
+                    'stars': repo.stargazers_count,
+                    'language': repo.language,
+                    'created_date': repo.created_at.isoformat(),
+                    'total_commits': repo.get_commits().totalCount
+                },
+                'commits': commits
             }
             
-        except Exception as e:
-            logger.error(f"Error processing {repo_full_name}: {e}")
-            return None
-    
-    async def collect_data(self, max_repos: int = 100) -> List[Dict]:
-        """Main method to collect data from multiple repositories."""
-        # Create output directory
-        Path("temp/datasets").mkdir(parents=True, exist_ok=True)
-        
-        async with aiohttp.ClientSession() as session:
-            # Search for repositories
-            repos = await self.search_repositories(session, max_repos=max_repos)
-            logger.info(f"Found {len(repos)} repositories to process")
+            # Compute metrics
+            founder = identify_founder(repo_data)
+            departure = detect_departure(repo_data, founder)
+            survival = compute_survival_metrics(repo_data, departure)
+            redundancy = compute_knowledge_redundancy(repo_data)
             
-            # Collect data for each repo
-            results = []
-            for i, repo in enumerate(repos):
-                logger.info(f"Progress: {i+1}/{len(repos)}")
-                repo_data = await self.collect_repo_data(session, repo)
-                if repo_data:
-                    results.append(repo_data)
+            # Build output record
+            output = {
+                'repo_id': repo_data['repo_id'],
+                'metadata': repo_data['metadata'],
+                'founder': departure,
+                'survival': survival,
+                'knowledge_redundancy': redundancy,
+                'commits_sample': commits[-100:] if len(commits) > 100 else commits
+            }
+            collected_data.append(output)
+            
+            # Rate limiting
+            time.sleep(0.8)
+            
+            # Checkpoint
+            if i % 10 == 0:
+                logger.info(f"Checkpoint: {i} repos processed")
                 
-                # Save checkpoint every 10 repos
-                if (i + 1) % 10 == 0:
-                    checkpoint_file = f"temp/datasets/checkpoint_{i+1}.json"
-                    Path(checkpoint_file).write_text(json.dumps(results, indent=2))
-                    logger.info(f"Saved checkpoint: {checkpoint_file}")
-            
-            return results
-
-@logger.catch(reraise=True)
-def main():
-    # Initialize collector (no token = 60 requests/hour, with token = 5000 requests/hour)
-    # For this demo, we'll collect a smaller sample
-    collector = GitHubDataCollector(token=None)
+        except Exception as e:
+            logger.error(f"Error processing {repo_info['full_name']}: {e}")
+            continue
     
-    # Collect data for 50 repositories (manageable without token)
-    logger.info("Starting GitHub data collection...")
-    results = asyncio.run(collector.collect_data(max_repos=50))
+    # Save output
+    logger.info(f"Saving {len(collected_data)} repositories to {args.output}")
+    with open(args.output, 'w') as f:
+        json.dump(collected_data, f, indent=2)
     
-    # Save final results
-    output_file = Path("temp/datasets/github_repo_data_full.json")
-    output_file.write_text(json.dumps(results, indent=2))
-    logger.info(f"Saved {len(results)} repositories to {output_file}")
+    # Check file size
+    file_size = Path(args.output).stat().st_size / (1024 * 1024)
+    logger.info(f"Dataset size: {file_size:.2f} MB")
     
-    # Create mini version (3 repos)
-    mini_file = Path("temp/datasets/github_repo_data_mini.json")
-    mini_file.write_text(json.dumps(results[:3], indent=2))
-    
-    # Create preview version
-    preview = []
-    for repo in results[:3]:
-        preview_repo = repo.copy()
-        # Truncate long fields
-        if "commits" in preview_repo:
-            for commit in preview_repo["commits"]:
-                if "message" in commit and len(commit["message"]) > 200:
-                    commit["message"] = commit["message"][:200] + "..."
-        preview.append(preview_repo)
-    
-    preview_file = Path("temp/datasets/github_repo_data_preview.json")
-    preview_file.write_text(json.dumps(preview, indent=2))
-    
-    logger.info("Data collection complete!")
+    # Print summary statistics
+    departed = sum(1 for d in collected_data if d['survival'].get('has_departure', False))
+    survived = sum(1 for d in collected_data if d['survival'].get('survival_status') == 'survived')
+    logger.info(f"Summary: {len(collected_data)} repos, {departed} with departures, {survived} survived")
 
 if __name__ == "__main__":
     main()
