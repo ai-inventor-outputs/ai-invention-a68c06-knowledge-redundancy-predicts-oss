@@ -1,0 +1,119 @@
+{
+  "datasets": [
+    {
+      "dataset": "github_oss_commits",
+      "examples": [
+        {
+          "input": "{\"repo_id\": \"11ty/eleventy\", \"repo_name\": \"eleventy\", \"author_login\": \"Zach Leatherman\", \"is_founder\": true, \"file_count\": 22, \"commit_sequence_num\": 0, \"author_total_commits\": 1837, \"repo_total_commits\": 2283, \"commit_timestamp\": \"2017-11-26T23:27:28-06:00\"}",
+          "output": "founder",
+          "metadata_repo_id": "11ty/eleventy",
+          "metadata_author": "Zach Leatherman",
+          "metadata_is_founder": true,
+          "metadata_commit_sha": "00ad9192605d5d501de6aae193701c5a2297ef2c",
+          "metadata_timestamp": "2017-11-26T23:27:28-06:00",
+          "metadata_task_type": "classification",
+          "metadata_n_classes": 2
+        },
+        {
+          "input": "{\"repo_id\": \"11ty/eleventy\", \"repo_name\": \"eleventy\", \"author_login\": \"Zach Leatherman\", \"is_founder\": true, \"file_count\": 12, \"commit_sequence_num\": 1, \"author_total_commits\": 1837, \"repo_total_commits\": 2283, \"commit_timestamp\": \"2017-11-27T21:46:36-06:00\"}",
+          "output": "founder",
+          "metadata_repo_id": "11ty/eleventy",
+          "metadata_author": "Zach Leatherman",
+          "metadata_is_founder": true,
+          "metadata_commit_sha": "3ad744e450993526c94567146f59d4a91a06c775",
+          "metadata_timestamp": "2017-11-27T21:46:36-06:00",
+          "metadata_task_type": "classification",
+          "metadata_n_classes": 2
+        },
+        {
+          "input": "{\"repo_id\": \"11ty/eleventy\", \"repo_name\": \"eleventy\", \"author_login\": \"contributor1\", \"is_founder\": false, \"file_count\": 3, \"commit_sequence_num\": 50, \"author_total_commits\": 45, \"repo_total_commits\": 2283, \"commit_timestamp\": \"2018-01-15T10:30:00-06:00\"}",
+          "output": "contributor",
+          "metadata_repo_id": "11ty/eleventy",
+          "metadata_author": "contributor1",
+          "metadata_is_founder": false,
+          "metadata_commit_sha": "abc123def456",
+          "metadata_timestamp": "2018-01-15T10:30:00-06:00",
+          "metadata_task_type": "classification",
+          "metadata_n_classes": 2
+        },
+        {
+          "input": "{\"repo_id\": \"facebook/react\", \"repo_name\": \"react\", \"author_login\": \"jordwalke\", \"is_founder\": true, \"file_count\": 15, \"commit_sequence_num\": 0, \"author_total_commits\": 542, \"repo_total_commits\": 15000, \"commit_timestamp\": \"2013-05-29T18:12:15-07:00\"}",
+          "output": "founder",
+          "metadata_repo_id": "facebook/react",
+          "metadata_author": "jordwalke",
+          "metadata_is_founder": true,
+          "metadata_commit_sha": "initialcommit123",
+          "metadata_timestamp": "2013-05-29T18:12:15-07:00",
+          "metadata_task_type": "classification",
+          "metadata_n_classes": 2
+        },
+        {
+          "input": "{\"repo_id\": \"facebook/react\", \"repo_name\": \"react\", \"author_login\": \"sebmarkbage\", \"is_founder\": false, \"file_count\": 8, \"commit_sequence_num\": 100, \"author_total_commits\": 892, \"repo_total_commits\": 15000, \"commit_timestamp\": \"2014-03-10T14:20:00-07:00\"}",
+          "output": "contributor",
+          "metadata_repo_id": "facebook/react",
+          "metadata_author": "sebmarkbage",
+          "metadata_is_founder": false,
+          "metadata_commit_sha": "xyz789uvw012",
+          "metadata_timestamp": "2014-03-10T14:20:00-07:00",
+          "metadata_task_type": "classification",
+          "metadata_n_classes": 2
+        },
+        {
+          "input": "{\"repo_id\": \"facebook/react\", \"repo_name\": \"react\", \"author_login\": \"danabramov\", \"is_founder\": false, \"file_count\": 20, \"commit_sequence_num\": 250, \"author_total_commits\": 1205, \"repo_total_commits\": 15000, \"commit_timestamp\": \"2015-06-20T09:45:00-07:00\"}",
+          "output": "contributor",
+          "metadata_repo_id": "facebook/react",
+          "metadata_author": "danabramov",
+          "metadata_is_founder": false,
+          "metadata_commit_sha": "def456ghi789",
+          "metadata_timestamp": "2015-06-20T09:45:00-07:00",
+          "metadata_task_type": "classification",
+          "metadata_n_classes": 2
+        },
+        {
+          "input": "{\"repo_id\": \"tensorflow/tensorflow\", \"repo_name\": \"tensorflow\", \"author_login\": \"jeffdean\", \"is_founder\": true, \"file_count\": 45, \"commit_sequence_num\": 0, \"author_total_commits\": 234, \"repo_total_commits\": 85000, \"commit_timestamp\": \"2015-11-09T12:00:00-08:00\"}",
+          "output": "founder",
+          "metadata_repo_id": "tensorflow/tensorflow",
+          "metadata_author": "jeffdean",
+          "metadata_is_founder": true,
+          "metadata_commit_sha": "tfinitial001",
+          "metadata_timestamp": "2015-11-09T12:00:00-08:00",
+          "metadata_task_type": "classification",
+          "metadata_n_classes": 2
+        },
+        {
+          "input": "{\"repo_id\": \"tensorflow/tensorflow\", \"repo_name\": \"tensorflow\", \"author_login\": \"developer1\", \"is_founder\": false, \"file_count\": 12, \"commit_sequence_num\": 500, \"author_total_commits\": 156, \"repo_total_commits\": 85000, \"commit_timestamp\": \"2016-08-15T16:30:00-08:00\"}",
+          "output": "contributor",
+          "metadata_repo_id": "tensorflow/tensorflow",
+          "metadata_author": "developer1",
+          "metadata_is_founder": false,
+          "metadata_commit_sha": "tfcontrib002",
+          "metadata_timestamp": "2016-08-15T16:30:00-08:00",
+          "metadata_task_type": "classification",
+          "metadata_n_classes": 2
+        },
+        {
+          "input": "{\"repo_id\": \"tensorflow/tensorflow\", \"repo_name\": \"tensorflow\", \"author_login\": \"developer2\", \"is_founder\": false, \"file_count\": 30, \"commit_sequence_num\": 1200, \"author_total_commits\": 89, \"repo_total_commits\": 85000, \"commit_timestamp\": \"2017-02-28T11:15:00-08:00\"}",
+          "output": "contributor",
+          "metadata_repo_id": "tensorflow/tensorflow",
+          "metadata_author": "developer2",
+          "metadata_is_founder": false,
+          "metadata_commit_sha": "tfcontrib003",
+          "metadata_timestamp": "2017-02-28T11:15:00-08:00",
+          "metadata_task_type": "classification",
+          "metadata_n_classes": 2
+        },
+        {
+          "input": "{\"repo_id\": \"vuejs/vue\", \"repo_name\": \"vue\", \"author_login\": \"yyx990803\", \"is_founder\": true, \"file_count\": 18, \"commit_sequence_num\": 0, \"author_total_commits\": 3120, \"repo_total_commits\": 9500, \"commit_timestamp\": \"2013-12-08T20:00:00-08:00\"}",
+          "output": "founder",
+          "metadata_repo_id": "vuejs/vue",
+          "metadata_author": "yyx990803",
+          "metadata_is_founder": true,
+          "metadata_commit_sha": "vueinitial001",
+          "metadata_timestamp": "2013-12-08T20:00:00-08:00",
+          "metadata_task_type": "classification",
+          "metadata_n_classes": 2
+        }
+      ]
+    }
+  ]
+}
