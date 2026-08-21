@@ -1,0 +1,10 @@
+repo_id,founder,departure_date,kr,kr_squared,survived,survival_time,censored,has_departure,project_age_days,contributor_count,total_commits_pre,bus_factor
+11ty/eleventy,Zach Leatherman,,0.13189632273472796,0.017396639950943513,,,,False,,,,
+EbookFoundation/free-programming-books,Victor Felder,2015-04-03T21:32:26+02:00,0.1191924562660132,0.01420684163072547,1.0,7.0,0.0,True,539.0,569.0,3010.0,2.0
+BuilderIO/builder,Steve Sewell,2023-07-31T16:22:16-04:00,0.9690965320456273,0.9391480884228616,1.0,0.0,0.0,True,1637.0,67.0,3091.0,2.0
+BuilderIO/mitosis,Steve Sewell,2025-04-03T14:46:18-07:00,0.5764429264724755,0.33228644748015185,1.0,0.0,0.0,True,1608.0,103.0,1226.0,2.0
+BuilderIO/partytown,Adam Bradley,2023-04-18T09:23:17-05:00,0.22593787838825502,0.05104792489058591,1.0,0.0,0.0,True,605.0,80.0,563.0,1.0
+BurntSushi/ripgrep,Andrew Gallant,2021-07-19T08:07:40-04:00,0.34783465439625644,0.12098894679896316,1.0,0.0,0.0,True,1956.0,294.0,1262.0,1.0
+ByteByteGoHq/system-design-101,Sahn Lam,2023-11-06T19:27:57-08:00,0.7788854381999831,0.6066625258399797,1.0,50.0,0.0,True,21.0,13.0,18.0,2.0
+Genymobile/scrcpy,Romain Vimont,,0.3507426710907363,0.12302042132386444,,,,False,,,,
+JetBrains/kotlin,Andrey Breslav,,0.9995556249177735,0.9991114473047608,,,,False,,,,
