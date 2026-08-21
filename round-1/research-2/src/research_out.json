@@ -1,0 +1,156 @@
+{
+  "title": "Knowledge Redundancy Measurement and Survival Analysis Validation for OSS Projects",
+  "summary": "Comprehensive validation of measurement approaches for knowledge redundancy using Jaccard similarity and other metrics, with Cox proportional hazards model specification for testing inverted-U hypothesis about OSS project survival after founder departure. Includes data collection feasibility assessment and statistical power analysis.",
+  "answer": "## Executive Summary\n\nThis research provides exhaustive validation of the technical feasibility of measuring knowledge redundancy from git commit data and testing the inverted-U hypothesis about OSS project survival after founder departure. The investigation covers measurement validation, statistical methodology, data collection feasibility, and statistical power requirements with extensive literature review.\n\n## Phase 1: Knowledge Redundancy Measurement Validation\n\n### 1.1 Jaccard Similarity for File Modification Overlap\n\n**Finding**: Jaccard similarity (|A\u2229B|/|A\u222aB|) is a standard measure for set overlap [1], but its application to measuring 'knowledge redundancy' in OSS projects requires careful consideration. The literature directly validating Jaccard for knowledge overlap in git contexts is limited.\n\n**Weighted Jaccard**: Available for positive vectors [1]. J_w(A,B) = \u03a3 min(a_i, b_i) / \u03a3 max(a_i, b_i) where weights = commit counts.\n\n**Overlap Coefficient vs Jaccard**: Overlap coefficient = |A\u2229B|/min(|A|,|B|) [14]. Preferred for different-sized sets [15]. Jaccard penalizes differences more [16].\n\n**Recommendation**: Jaccard baseline + sensitivity analysis with weighted Jaccard, overlap coefficient, and DOA [2][3].\n\n### 1.2 Degree of Authorship (DOA) Metric\n\n**DOA Formula** (Avelino et al. 2016 [17]): DOA = 3.293 + 1.098\u00d7FA + 0.164\u00d7DL \u2212 0.321\u00d7ln(1+AC)\n- FA: First Authorship (binary, strongest predictor)\n- DL: Deliveries (number of changes)\n- AC: Acceptances (changes by others, logarithmic decay)\n\n**Validation**: 84% agreement in survey of 67 GitHub projects [17].\n\n### 1.3 Alternative Measures\n\n**HHI Index**: HHI = \u03a3 s_i\u00b2 [18]. Ranges 1/N to 1. >0.15 = moderate concentration.\n**Shannon Entropy**: H = -\u03a3 p_i log(p_i) [4]. Higher = more diverse.\n\n## Phase 2: Survival Analysis Methodology\n\n### 2.1 Cox Model for Inverted-U Test\n\n**Model**: h(t,X) = h_0(t) * exp(\u03b2\u2081*X + \u03b2\u2082*X\u00b2 + \u03b2\u2083*Z)\n- Inverted-U: \u03b2\u2081 > 0 AND \u03b2\u2082 < 0\n- Hazard ratio = exp(\u03b2\u2081 + 2*\u03b2\u2082*X), depends on X [7]\n- Turning point = -\u03b2\u2081/(2*\u03b2\u2082) [7]\n\n**Time-Varying Covariates**: Use CoxTimeVaryingFitter in lifelines [19].\n\n### 2.2 Survival Definition\n\n**Validated** (Avelino et al. [3]):\n- Event: No commits from core contributors for 12+ months\n- Threshold validated: 1-year best harmonic mean (66%) across 5 thresholds\n- Censoring: Right-censoring at data collection end\n\n**Competing Risks**: Consider Fine-Gray model [20].\n\n## Phase 3: Control Variables\n\n### 3.1 Bus Factor Algorithm\n\n**Recommendation**: Avelino et al. DOA algorithm [3][17]\n- Validated: 84% agreement (67 projects)\n- Best precision/recall (SBCARS 2016) [21]\n- Implementation: https://github.com/aserg-ufmg/Truck-Factor\n\n### 3.2 Project Characteristics\n\n**Validated Measures** (Ali et al. [5], Avelino et al. [3]):\n1. Age: Days first commit to founder departure\n2. Size: Commits, files (log-transformed)\n3. Popularity: Stars, forks, contributors (HR=0.997 [5])\n4. Releases: Binary (HR=0.15 [5])\n\n## Phase 4: Statistical Power\n\n**Rule**: 10 events per variable [9]\n**Variables**: ~10-15\n**Expected Events**: 2000 \u00d7 15% \u00d7 60% = 180\n**Conclusion**: Sufficient power.\n\n## Phase 5: Data Collection\n\n### 5.1 GitHub API\n\n**Rate Limits** [10]: 5000/hour authenticated, 5000 points/hour GraphQL [11]\n**GraphQL Optimization** [22][23][24]: 60-80% reduction in calls vs. REST\n**Time Estimate**: 2 hours for 2000 repos (3-5 GraphQL calls/repo)\n\n### 5.2 Founder Departure\n\n**Algorithm** [3]:\n1. Founder = most commits first 6 months\n2. 12+ months inactivity after last commit\n3. Edge case: <6 commits in 12 months = departed\n\n**Validation**: Manual check 30-50 samples.\n\n## Phase 6: Synthesis\n\n### 6.1 Pipeline\n\n**Scripts**:\n1. 01_collect_data.py: GraphQL API\n2. 02_compute_measurements.py: Jaccard, DOA, HHI, bus factor\n3. 03_survival_analysis.py: Cox model, quadratic term\n4. 04_sensitivity_analysis.py: Robustness checks\n\n### 6.2 Diagnostics\n\n1. Proportional hazards: Schoenfeld test (p > 0.05)\n2. Linearity: Martingale residuals\n3. Collinearity: VIF < 5\n4. Quadratic term: Likelihood ratio test\n\n## Confidence Assessment\n\n**High**: Cox model, Avelino algorithm, 2000 projects power, GraphQL feasibility\n**Medium**: Jaccard validity, 12-month threshold\n**Low**: Optimal weighting, knowledge decay, competing risks\n\n## Key Recommendations\n\n1. Jaccard + DOA/HHI sensitivity\n2. Avelino DOA bus factor algorithm\n3. Cox PH with quadratic term + diagnostics\n4. GitHub GraphQL API with caching\n5. 2000 projects sufficient\n6. Validate 30-50 founder departures\n\n## References\n\n[1] Jaccard Index - Wikipedia\n[2] DOA Explanation - ContributorIQ\n[3] Avelino et al. (2019) arXiv:1906.08058\n[4] Shannon Entropy - Wikipedia\n[5] Ali et al. (2020) MSR '20\n[6] Cox Model - Wikipedia\n[7] Cox Quadratic Interpretation - Cross Validated\n[8] Cosentino et al. (2015) IEEE SANER\n[9] Power Analysis - Stata\n[10] GitHub Rate Limits\n[11] GraphQL vs REST - GitHub\n[12] GHTorrent Status\n[13] Software Heritage MSR 2019\n[14] Overlap Coefficient - Wikipedia\n[15] Jaccard vs Overlap - NVIDIA\n[16] Similarity Coefficients - Medium\n[17] Avelino et al. (2016) arXiv:1604.06766\n[18] HHI Index - Wikipedia\n[19] Time-varying lifelines\n[20] Competing Risks - PMC\n[21] Truck Factor Comparison - SBCARS 2016\n[22] GraphQL Examples - Tracy Lum\n[23] GraphQL Pagination - GitHub\n[24] GraphQL Efficiency - Steve Mar",
+  "sources": [
+    {
+      "index": 1,
+      "url": "https://en.wikipedia.org/wiki/Jaccard_index",
+      "title": "Jaccard Index - Wikipedia",
+      "summary": "Defines Jaccard similarity, weighted Jaccard for positive vectors"
+    },
+    {
+      "index": 2,
+      "url": "https://contributoriq.com/blog/degree-of-authorship-code-ownership-explained",
+      "title": "DOA Explanation",
+      "summary": "DOA metric with FA, DL, AC components"
+    },
+    {
+      "index": 3,
+      "url": "https://arxiv.org/abs/1906.08058",
+      "title": "Avelino et al. (2019)",
+      "summary": "1932 GitHub projects, 16% TFDD, 41% survival, 1-year threshold validated"
+    },
+    {
+      "index": 4,
+      "url": "https://en.wikipedia.org/wiki/Entropy_(information_theory)",
+      "title": "Shannon Entropy",
+      "summary": "Measures diversity for knowledge distribution"
+    },
+    {
+      "index": 5,
+      "url": "http://www1.chapman.edu/~linstead/aliMSR2020.pdf",
+      "title": "Ali et al. (2020)",
+      "summary": "Cox model 2059 projects, HR=0.997 per contributor"
+    },
+    {
+      "index": 6,
+      "url": "https://en.wikipedia.org/wiki/Proportional_hazards_model",
+      "title": "Cox Proportional Hazards",
+      "summary": "Cox model assumptions and hazard ratios"
+    },
+    {
+      "index": 7,
+      "url": "https://stats.stackexchange.com/questions/386563",
+      "title": "Cox Quadratic Term",
+      "summary": "Hazard ratio depends on current value, turning point formula"
+    },
+    {
+      "index": 8,
+      "url": "https://ieeexplore.ieee.org/document/7081864/",
+      "title": "Cosentino et al. (2015)",
+      "summary": "Bus factor algorithms for git repos"
+    },
+    {
+      "index": 9,
+      "url": "https://www.stata.com/manuals15/psspowercox.pdf",
+      "title": "Power Analysis Cox",
+      "summary": "10 events per variable rule"
+    },
+    {
+      "index": 10,
+      "url": "https://docs.github.com/en/rest/using-the-rest-api/rate-limits-for-the-rest-api",
+      "title": "GitHub Rate Limits",
+      "summary": "5000 requests/hour authenticated"
+    },
+    {
+      "index": 11,
+      "url": "https://docs.github.com/en/rest/about-the-rest-api/comparing-githubs-rest-api-and-graphql-api",
+      "title": "GraphQL vs REST",
+      "summary": "GraphQL more efficient for batch queries"
+    },
+    {
+      "index": 12,
+      "url": "https://github.com/ghtorrent/ghtorrent.org",
+      "title": "GHTorrent Status",
+      "summary": "Stopped 2019, outdated"
+    },
+    {
+      "index": 13,
+      "url": "https://dl.acm.org/doi/10.1145/3379597.3387510",
+      "title": "Software Heritage",
+      "summary": "Largest source code archive, 3-6 month lag"
+    },
+    {
+      "index": 14,
+      "url": "https://en.wikipedia.org/wiki/Overlap_coefficient",
+      "title": "Overlap Coefficient",
+      "summary": "|A\u2229B|/min(|A|,|B|), different-sized sets"
+    },
+    {
+      "index": 15,
+      "url": "https://developer.nvidia.com/blog/similarity-in-graphs-jaccard-versus-the-overlap-coefficient/",
+      "title": "Jaccard vs Overlap",
+      "summary": "Overlap for subset relationships"
+    },
+    {
+      "index": 16,
+      "url": "https://medium.com/@igniobydigitate/similarity-coefficients",
+      "title": "Similarity Coefficients",
+      "summary": "Jaccard vs Overlap comparison"
+    },
+    {
+      "index": 17,
+      "url": "https://arxiv.org/abs/1604.06766",
+      "title": "Avelino et al. (2016)",
+      "summary": "DOA formula, 84% survey agreement"
+    },
+    {
+      "index": 18,
+      "url": "https://en.wikipedia.org/wiki/Herfindahl%E2%80%93Hirschman_index",
+      "title": "HHI Index",
+      "summary": "Concentration measure for knowledge distribution"
+    },
+    {
+      "index": 19,
+      "url": "https://lifelines.readthedocs.io/en/latest/Time+varying+survival+regression.html",
+      "title": "Time-varying lifelines",
+      "summary": "CoxTimeVaryingFitter documentation"
+    },
+    {
+      "index": 20,
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC5764182/",
+      "title": "Competing Risks",
+      "summary": "Fine-Gray model for competing events"
+    },
+    {
+      "index": 21,
+      "url": "https://doi.org/10.1109/sbcars.2016.20",
+      "title": "Truck Factor Comparison",
+      "summary": "Avelino best precision/recall"
+    },
+    {
+      "index": 22,
+      "url": "https://www.tracylum.com/blog/2017-09-09-querying-githubs-graphql-api/",
+      "title": "GraphQL Examples",
+      "summary": "GitHub GraphQL query examples"
+    },
+    {
+      "index": 23,
+      "url": "https://docs.github.com/en/graphql/guides/using-pagination-in-the-graphql-api",
+      "title": "GraphQL Pagination",
+      "summary": "Cursor-based pagination documentation"
+    },
+    {
+      "index": 24,
+      "url": "https://www.stevemar.net/github-graphql-vs-rest/",
+      "title": "GraphQL Efficiency",
+      "summary": "60-80% reduction in API calls"
+    }
+  ],
+  "follow_up_questions": [
+    "What is the optimal threshold for defining project abandonment after founder departure, and how sensitive are results to this choice (6 vs. 12 vs. 18 months)?",
+    "How does Jaccard similarity compare to DOA-based and HHI-based measures in terms of predictive validity for project survival?",
+    "What is the actual founder departure rate in popular GitHub repositories, and how does it vary by project characteristics?"
+  ]
+}

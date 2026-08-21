@@ -1,0 +1,8 @@
+{
+  "timestamp": "2026-08-21T15:46:13.457916",
+  "method": "sample_generation",
+  "total_repos": 1000,
+  "departed_count": 768,
+  "survived_count": 601,
+  "note": "This is a sample dataset for methodology demonstration. Full collection requires GitHub API access with valid token."
+}

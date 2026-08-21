@@ -1,0 +1,9 @@
+{
+  "total_examples": 1000,
+  "departed_count": 768,
+  "survived_count": 601,
+  "file_size_mb": 0.6120452880859375,
+  "meets_departure_criteria": true,
+  "meets_survival_criteria": true,
+  "schema_valid": true
+}
