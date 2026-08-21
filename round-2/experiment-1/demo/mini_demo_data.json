@@ -1,0 +1,65 @@
+{
+  "datasets": [
+    {
+      "dataset": "github_oss_survival",
+      "examples": [
+        {
+          "input": "{\"knowledge_redundancy_score\": 0.25, \"stars\": 150, \"language_encoded\": 1, \"total_commits\": 800, \"top_contributors_count\": 3, \"pre_departure_commits_per_month\": 20.0, \"post_departure_commits_per_month\": 18.0}",
+          "output": "survived",
+          "metadata_has_departure": true,
+          "metadata_repo_id": "org/repo-1",
+          "metadata_language": "Python"
+        },
+        {
+          "input": "{\"knowledge_redundancy_score\": 0.35, \"stars\": 500, \"language_encoded\": 2, \"total_commits\": 1200, \"top_contributors_count\": 5, \"pre_departure_commits_per_month\": 35.0, \"post_departure_commits_per_month\": 30.0}",
+          "output": "survived",
+          "metadata_has_departure": true,
+          "metadata_repo_id": "org/repo-2",
+          "metadata_language": "JavaScript"
+        },
+        {
+          "input": "{\"knowledge_redundancy_score\": 0.45, \"stars\": 300, \"language_encoded\": 1, \"total_commits\": 950, \"top_contributors_count\": 4, \"pre_departure_commits_per_month\": 25.0, \"post_departure_commits_per_month\": 2.0}",
+          "output": "died",
+          "metadata_has_departure": true,
+          "metadata_repo_id": "org/repo-3",
+          "metadata_language": "Python"
+        },
+        {
+          "input": "{\"knowledge_redundancy_score\": 0.55, \"stars\": 800, \"language_encoded\": 3, \"total_commits\": 1500, \"top_contributors_count\": 6, \"pre_departure_commits_per_month\": 40.0, \"post_departure_commits_per_month\": 5.0}",
+          "output": "died",
+          "metadata_has_departure": true,
+          "metadata_repo_id": "org/repo-4",
+          "metadata_language": "Java"
+        },
+        {
+          "input": "{\"knowledge_redundancy_score\": 0.65, \"stars\": 1200, \"language_encoded\": 2, \"total_commits\": 2000, \"top_contributors_count\": 8, \"pre_departure_commits_per_month\": 50.0, \"post_departure_commits_per_month\": 45.0}",
+          "output": "survived",
+          "metadata_has_departure": true,
+          "metadata_repo_id": "org/repo-5",
+          "metadata_language": "JavaScript"
+        },
+        {
+          "input": "{\"knowledge_redundancy_score\": 0.75, \"stars\": 200, \"language_encoded\": 1, \"total_commits\": 600, \"top_contributors_count\": 2, \"pre_departure_commits_per_month\": 15.0, \"post_departure_commits_per_month\": 1.0}",
+          "output": "died",
+          "metadata_has_departure": true,
+          "metadata_repo_id": "org/repo-6",
+          "metadata_language": "Python"
+        },
+        {
+          "input": "{\"knowledge_redundancy_score\": 0.30, \"stars\": 400, \"language_encoded\": 3, \"total_commits\": 1100, \"top_contributors_count\": 4, \"pre_departure_commits_per_month\": 30.0, \"post_departure_commits_per_month\": 28.0}",
+          "output": "survived",
+          "metadata_has_departure": true,
+          "metadata_repo_id": "org/repo-7",
+          "metadata_language": "Java"
+        },
+        {
+          "input": "{\"knowledge_redundancy_score\": 0.50, \"stars\": 600, \"language_encoded\": 2, \"total_commits\": 1300, \"top_contributors_count\": 5, \"pre_departure_commits_per_month\": 32.0, \"post_departure_commits_per_month\": 3.0}",
+          "output": "died",
+          "metadata_has_departure": true,
+          "metadata_repo_id": "org/repo-8",
+          "metadata_language": "JavaScript"
+        }
+      ]
+    }
+  ]
+}

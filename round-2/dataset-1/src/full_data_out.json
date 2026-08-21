@@ -1,0 +1,459 @@
+{
+  "datasets": [
+    {
+      "dataset": "github_oss_survival",
+      "examples": [
+        {
+          "input": "{\"repo_name\": \"sample-repo-1\", \"owner\": \"sample-owner\", \"stars\": 2191, \"language\": \"JavaScript\", \"created_date\": \"2020-01-01T00:00:00Z\", \"contributors\": [{\"login\": \"contributor1\", \"files_modified\": [\"src/main.py\", \"tests/test.py\"]}, {\"login\": \"contributor2\", \"files_modified\": [\"src/utils.py\"]}], \"commits\": [{\"sha\": \"abc123\", \"author\": \"contributor1\", \"files\": [\"src/main.py\"]}]}",
+          "output": "True",
+          "metadata_repo_index": 1,
+          "metadata_language": "Go",
+          "metadata_stars": 7508,
+          "metadata_founder_departed": true,
+          "metadata_knowledge_redundancy": 0.34
+        },
+        {
+          "input": "{\"repo_name\": \"sample-repo-2\", \"owner\": \"sample-owner\", \"stars\": 1386, \"language\": \"Java\", \"created_date\": \"2020-01-01T00:00:00Z\", \"contributors\": [{\"login\": \"contributor1\", \"files_modified\": [\"src/main.py\", \"tests/test.py\"]}, {\"login\": \"contributor2\", \"files_modified\": [\"src/utils.py\"]}], \"commits\": [{\"sha\": \"abc123\", \"author\": \"contributor1\", \"files\": [\"src/main.py\"]}]}",
+          "output": "True",
+          "metadata_repo_index": 2,
+          "metadata_language": "Java",
+          "metadata_stars": 2269,
+          "metadata_founder_departed": true,
+          "metadata_knowledge_redundancy": 0.17
+        },
+        {
+          "input": "{\"repo_name\": \"sample-repo-3\", \"owner\": \"sample-owner\", \"stars\": 6427, \"language\": \"Java\", \"created_date\": \"2020-01-01T00:00:00Z\", \"contributors\": [{\"login\": \"contributor1\", \"files_modified\": [\"src/main.py\", \"tests/test.py\"]}, {\"login\": \"contributor2\", \"files_modified\": [\"src/utils.py\"]}], \"commits\": [{\"sha\": \"abc123\", \"author\": \"contributor1\", \"files\": [\"src/main.py\"]}]}",
+          "output": "True",
+          "metadata_repo_index": 3,
+          "metadata_language": "Java",
+          "metadata_stars": 5064,
+          "metadata_founder_departed": true,
+          "metadata_knowledge_redundancy": 0.26
+        },
+        {
+          "input": "{\"repo_name\": \"sample-repo-4\", \"owner\": \"sample-owner\", \"stars\": 4289, \"language\": \"Java\", \"created_date\": \"2020-01-01T00:00:00Z\", \"contributors\": [{\"login\": \"contributor1\", \"files_modified\": [\"src/main.py\", \"tests/test.py\"]}, {\"login\": \"contributor2\", \"files_modified\": [\"src/utils.py\"]}], \"commits\": [{\"sha\": \"abc123\", \"author\": \"contributor1\", \"files\": [\"src/main.py\"]}]}",
+          "output": "True",
+          "metadata_repo_index": 4,
+          "metadata_language": "JavaScript",
+          "metadata_stars": 2438,
+          "metadata_founder_departed": false,
+          "metadata_knowledge_redundancy": 0.25
+        },
+        {
+          "input": "{\"repo_name\": \"sample-repo-5\", \"owner\": \"sample-owner\", \"stars\": 7812, \"language\": \"Python\", \"created_date\": \"2020-01-01T00:00:00Z\", \"contributors\": [{\"login\": \"contributor1\", \"files_modified\": [\"src/main.py\", \"tests/test.py\"]}, {\"login\": \"contributor2\", \"files_modified\": [\"src/utils.py\"]}], \"commits\": [{\"sha\": \"abc123\", \"author\": \"contributor1\", \"files\": [\"src/main.py\"]}]}",
+          "output": "True",
+          "metadata_repo_index": 5,
+          "metadata_language": "Java",
+          "metadata_stars": 8926,
+          "metadata_founder_departed": true,
+          "metadata_knowledge_redundancy": 0.19
+        },
+        {
+          "input": "{\"repo_name\": \"sample-repo-6\", \"owner\": \"sample-owner\", \"stars\": 3337, \"language\": \"Python\", \"created_date\": \"2020-01-01T00:00:00Z\", \"contributors\": [{\"login\": \"contributor1\", \"files_modified\": [\"src/main.py\", \"tests/test.py\"]}, {\"login\": \"contributor2\", \"files_modified\": [\"src/utils.py\"]}], \"commits\": [{\"sha\": \"abc123\", \"author\": \"contributor1\", \"files\": [\"src/main.py\"]}]}",
+          "output": "True",
+          "metadata_repo_index": 6,
+          "metadata_language": "JavaScript",
+          "metadata_stars": 2006,
+          "metadata_founder_departed": false,
+          "metadata_knowledge_redundancy": 0.6
+        },
+        {
+          "input": "{\"repo_name\": \"sample-repo-7\", \"owner\": \"sample-owner\", \"stars\": 516, \"language\": \"JavaScript\", \"created_date\": \"2020-01-01T00:00:00Z\", \"contributors\": [{\"login\": \"contributor1\", \"files_modified\": [\"src/main.py\", \"tests/test.py\"]}, {\"login\": \"contributor2\", \"files_modified\": [\"src/utils.py\"]}], \"commits\": [{\"sha\": \"abc123\", \"author\": \"contributor1\", \"files\": [\"src/main.py\"]}]}",
+          "output": "True",
+          "metadata_repo_index": 7,
+          "metadata_language": "Python",
+          "metadata_stars": 5205,
+          "metadata_founder_departed": true,
+          "metadata_knowledge_redundancy": 0.45
+        },
+        {
+          "input": "{\"repo_name\": \"sample-repo-8\", \"owner\": \"sample-owner\", \"stars\": 848, \"language\": \"Go\", \"created_date\": \"2020-01-01T00:00:00Z\", \"contributors\": [{\"login\": \"contributor1\", \"files_modified\": [\"src/main.py\", \"tests/test.py\"]}, {\"login\": \"contributor2\", \"files_modified\": [\"src/utils.py\"]}], \"commits\": [{\"sha\": \"abc123\", \"author\": \"contributor1\", \"files\": [\"src/main.py\"]}]}",
+          "output": "False",
+          "metadata_repo_index": 8,
+          "metadata_language": "JavaScript",
+          "metadata_stars": 8359,
+          "metadata_founder_departed": false,
+          "metadata_knowledge_redundancy": 0.6
+        },
+        {
+          "input": "{\"repo_name\": \"sample-repo-9\", \"owner\": \"sample-owner\", \"stars\": 5360, \"language\": \"JavaScript\", \"created_date\": \"2020-01-01T00:00:00Z\", \"contributors\": [{\"login\": \"contributor1\", \"files_modified\": [\"src/main.py\", \"tests/test.py\"]}, {\"login\": \"contributor2\", \"files_modified\": [\"src/utils.py\"]}], \"commits\": [{\"sha\": \"abc123\", \"author\": \"contributor1\", \"files\": [\"src/main.py\"]}]}",
+          "output": "True",
+          "metadata_repo_index": 9,
+          "metadata_language": "Java",
+          "metadata_stars": 1501,
+          "metadata_founder_departed": true,
+          "metadata_knowledge_redundancy": 0.65
+        },
+        {
+          "input": "{\"repo_name\": \"sample-repo-10\", \"owner\": \"sample-owner\", \"stars\": 1466, \"language\": \"Python\", \"created_date\": \"2020-01-01T00:00:00Z\", \"contributors\": [{\"login\": \"contributor1\", \"files_modified\": [\"src/main.py\", \"tests/test.py\"]}, {\"login\": \"contributor2\", \"files_modified\": [\"src/utils.py\"]}], \"commits\": [{\"sha\": \"abc123\", \"author\": \"contributor1\", \"files\": [\"src/main.py\"]}]}",
+          "output": "False",
+          "metadata_repo_index": 10,
+          "metadata_language": "JavaScript",
+          "metadata_stars": 6883,
+          "metadata_founder_departed": true,
+          "metadata_knowledge_redundancy": 0.53
+        },
+        {
+          "input": "{\"repo_name\": \"sample-repo-11\", \"owner\": \"sample-owner\", \"stars\": 1502, \"language\": \"JavaScript\", \"created_date\": \"2020-01-01T00:00:00Z\", \"contributors\": [{\"login\": \"contributor1\", \"files_modified\": [\"src/main.py\", \"tests/test.py\"]}, {\"login\": \"contributor2\", \"files_modified\": [\"src/utils.py\"]}], \"commits\": [{\"sha\": \"abc123\", \"author\": \"contributor1\", \"files\": [\"src/main.py\"]}]}",
+          "output": "True",
+          "metadata_repo_index": 11,
+          "metadata_language": "Go",
+          "metadata_stars": 980,
+          "metadata_founder_departed": false,
+          "metadata_knowledge_redundancy": 0.56
+        },
+        {
+          "input": "{\"repo_name\": \"sample-repo-12\", \"owner\": \"sample-owner\", \"stars\": 5281, \"language\": \"Java\", \"created_date\": \"2020-01-01T00:00:00Z\", \"contributors\": [{\"login\": \"contributor1\", \"files_modified\": [\"src/main.py\", \"tests/test.py\"]}, {\"login\": \"contributor2\", \"files_modified\": [\"src/utils.py\"]}], \"commits\": [{\"sha\": \"abc123\", \"author\": \"contributor1\", \"files\": [\"src/main.py\"]}]}",
+          "output": "False",
+          "metadata_repo_index": 12,
+          "metadata_language": "Python",
+          "metadata_stars": 2734,
+          "metadata_founder_departed": true,
+          "metadata_knowledge_redundancy": 0.4
+        },
+        {
+          "input": "{\"repo_name\": \"sample-repo-13\", \"owner\": \"sample-owner\", \"stars\": 6505, \"language\": \"Go\", \"created_date\": \"2020-01-01T00:00:00Z\", \"contributors\": [{\"login\": \"contributor1\", \"files_modified\": [\"src/main.py\", \"tests/test.py\"]}, {\"login\": \"contributor2\", \"files_modified\": [\"src/utils.py\"]}], \"commits\": [{\"sha\": \"abc123\", \"author\": \"contributor1\", \"files\": [\"src/main.py\"]}]}",
+          "output": "True",
+          "metadata_repo_index": 13,
+          "metadata_language": "Java",
+          "metadata_stars": 8670,
+          "metadata_founder_departed": false,
+          "metadata_knowledge_redundancy": 0.53
+        },
+        {
+          "input": "{\"repo_name\": \"sample-repo-14\", \"owner\": \"sample-owner\", \"stars\": 8910, \"language\": \"Go\", \"created_date\": \"2020-01-01T00:00:00Z\", \"contributors\": [{\"login\": \"contributor1\", \"files_modified\": [\"src/main.py\", \"tests/test.py\"]}, {\"login\": \"contributor2\", \"files_modified\": [\"src/utils.py\"]}], \"commits\": [{\"sha\": \"abc123\", \"author\": \"contributor1\", \"files\": [\"src/main.py\"]}]}",
+          "output": "True",
+          "metadata_repo_index": 14,
+          "metadata_language": "JavaScript",
+          "metadata_stars": 1676,
+          "metadata_founder_departed": true,
+          "metadata_knowledge_redundancy": 0.56
+        },
+        {
+          "input": "{\"repo_name\": \"sample-repo-15\", \"owner\": \"sample-owner\", \"stars\": 7185, \"language\": \"Python\", \"created_date\": \"2020-01-01T00:00:00Z\", \"contributors\": [{\"login\": \"contributor1\", \"files_modified\": [\"src/main.py\", \"tests/test.py\"]}, {\"login\": \"contributor2\", \"files_modified\": [\"src/utils.py\"]}], \"commits\": [{\"sha\": \"abc123\", \"author\": \"contributor1\", \"files\": [\"src/main.py\"]}]}",
+          "output": "False",
+          "metadata_repo_index": 15,
+          "metadata_language": "Java",
+          "metadata_stars": 1028,
+          "metadata_founder_departed": false,
+          "metadata_knowledge_redundancy": 0.88
+        },
+        {
+          "input": "{\"repo_name\": \"sample-repo-16\", \"owner\": \"sample-owner\", \"stars\": 9306, \"language\": \"Java\", \"created_date\": \"2020-01-01T00:00:00Z\", \"contributors\": [{\"login\": \"contributor1\", \"files_modified\": [\"src/main.py\", \"tests/test.py\"]}, {\"login\": \"contributor2\", \"files_modified\": [\"src/utils.py\"]}], \"commits\": [{\"sha\": \"abc123\", \"author\": \"contributor1\", \"files\": [\"src/main.py\"]}]}",
+          "output": "True",
+          "metadata_repo_index": 16,
+          "metadata_language": "JavaScript",
+          "metadata_stars": 7148,
+          "metadata_founder_departed": false,
+          "metadata_knowledge_redundancy": 0.42
+        },
+        {
+          "input": "{\"repo_name\": \"sample-repo-17\", \"owner\": \"sample-owner\", \"stars\": 7575, \"language\": \"Java\", \"created_date\": \"2020-01-01T00:00:00Z\", \"contributors\": [{\"login\": \"contributor1\", \"files_modified\": [\"src/main.py\", \"tests/test.py\"]}, {\"login\": \"contributor2\", \"files_modified\": [\"src/utils.py\"]}], \"commits\": [{\"sha\": \"abc123\", \"author\": \"contributor1\", \"files\": [\"src/main.py\"]}]}",
+          "output": "True",
+          "metadata_repo_index": 17,
+          "metadata_language": "Python",
+          "metadata_stars": 5655,
+          "metadata_founder_departed": true,
+          "metadata_knowledge_redundancy": 0.81
+        },
+        {
+          "input": "{\"repo_name\": \"sample-repo-18\", \"owner\": \"sample-owner\", \"stars\": 7622, \"language\": \"Python\", \"created_date\": \"2020-01-01T00:00:00Z\", \"contributors\": [{\"login\": \"contributor1\", \"files_modified\": [\"src/main.py\", \"tests/test.py\"]}, {\"login\": \"contributor2\", \"files_modified\": [\"src/utils.py\"]}], \"commits\": [{\"sha\": \"abc123\", \"author\": \"contributor1\", \"files\": [\"src/main.py\"]}]}",
+          "output": "True",
+          "metadata_repo_index": 18,
+          "metadata_language": "Python",
+          "metadata_stars": 1126,
+          "metadata_founder_departed": false,
+          "metadata_knowledge_redundancy": 0.37
+        },
+        {
+          "input": "{\"repo_name\": \"sample-repo-19\", \"owner\": \"sample-owner\", \"stars\": 2817, \"language\": \"JavaScript\", \"created_date\": \"2020-01-01T00:00:00Z\", \"contributors\": [{\"login\": \"contributor1\", \"files_modified\": [\"src/main.py\", \"tests/test.py\"]}, {\"login\": \"contributor2\", \"files_modified\": [\"src/utils.py\"]}], \"commits\": [{\"sha\": \"abc123\", \"author\": \"contributor1\", \"files\": [\"src/main.py\"]}]}",
+          "output": "True",
+          "metadata_repo_index": 19,
+          "metadata_language": "Python",
+          "metadata_stars": 9213,
+          "metadata_founder_departed": false,
+          "metadata_knowledge_redundancy": 0.66
+        },
+        {
+          "input": "{\"repo_name\": \"sample-repo-20\", \"owner\": \"sample-owner\", \"stars\": 5136, \"language\": \"Go\", \"created_date\": \"2020-01-01T00:00:00Z\", \"contributors\": [{\"login\": \"contributor1\", \"files_modified\": [\"src/main.py\", \"tests/test.py\"]}, {\"login\": \"contributor2\", \"files_modified\": [\"src/utils.py\"]}], \"commits\": [{\"sha\": \"abc123\", \"author\": \"contributor1\", \"files\": [\"src/main.py\"]}]}",
+          "output": "False",
+          "metadata_repo_index": 20,
+          "metadata_language": "Python",
+          "metadata_stars": 8063,
+          "metadata_founder_departed": true,
+          "metadata_knowledge_redundancy": 0.59
+        },
+        {
+          "input": "{\"repo_name\": \"sample-repo-21\", \"owner\": \"sample-owner\", \"stars\": 9310, \"language\": \"Python\", \"created_date\": \"2020-01-01T00:00:00Z\", \"contributors\": [{\"login\": \"contributor1\", \"files_modified\": [\"src/main.py\", \"tests/test.py\"]}, {\"login\": \"contributor2\", \"files_modified\": [\"src/utils.py\"]}], \"commits\": [{\"sha\": \"abc123\", \"author\": \"contributor1\", \"files\": [\"src/main.py\"]}]}",
+          "output": "False",
+          "metadata_repo_index": 21,
+          "metadata_language": "Java",
+          "metadata_stars": 2358,
+          "metadata_founder_departed": false,
+          "metadata_knowledge_redundancy": 0.75
+        },
+        {
+          "input": "{\"repo_name\": \"sample-repo-22\", \"owner\": \"sample-owner\", \"stars\": 4995, \"language\": \"JavaScript\", \"created_date\": \"2020-01-01T00:00:00Z\", \"contributors\": [{\"login\": \"contributor1\", \"files_modified\": [\"src/main.py\", \"tests/test.py\"]}, {\"login\": \"contributor2\", \"files_modified\": [\"src/utils.py\"]}], \"commits\": [{\"sha\": \"abc123\", \"author\": \"contributor1\", \"files\": [\"src/main.py\"]}]}",
+          "output": "False",
+          "metadata_repo_index": 22,
+          "metadata_language": "Python",
+          "metadata_stars": 4604,
+          "metadata_founder_departed": false,
+          "metadata_knowledge_redundancy": 0.57
+        },
+        {
+          "input": "{\"repo_name\": \"sample-repo-23\", \"owner\": \"sample-owner\", \"stars\": 5739, \"language\": \"Python\", \"created_date\": \"2020-01-01T00:00:00Z\", \"contributors\": [{\"login\": \"contributor1\", \"files_modified\": [\"src/main.py\", \"tests/test.py\"]}, {\"login\": \"contributor2\", \"files_modified\": [\"src/utils.py\"]}], \"commits\": [{\"sha\": \"abc123\", \"author\": \"contributor1\", \"files\": [\"src/main.py\"]}]}",
+          "output": "True",
+          "metadata_repo_index": 23,
+          "metadata_language": "Go",
+          "metadata_stars": 2024,
+          "metadata_founder_departed": true,
+          "metadata_knowledge_redundancy": 0.24
+        },
+        {
+          "input": "{\"repo_name\": \"sample-repo-24\", \"owner\": \"sample-owner\", \"stars\": 1442, \"language\": \"JavaScript\", \"created_date\": \"2020-01-01T00:00:00Z\", \"contributors\": [{\"login\": \"contributor1\", \"files_modified\": [\"src/main.py\", \"tests/test.py\"]}, {\"login\": \"contributor2\", \"files_modified\": [\"src/utils.py\"]}], \"commits\": [{\"sha\": \"abc123\", \"author\": \"contributor1\", \"files\": [\"src/main.py\"]}]}",
+          "output": "False",
+          "metadata_repo_index": 24,
+          "metadata_language": "Java",
+          "metadata_stars": 6200,
+          "metadata_founder_departed": false,
+          "metadata_knowledge_redundancy": 0.42
+        },
+        {
+          "input": "{\"repo_name\": \"sample-repo-25\", \"owner\": \"sample-owner\", \"stars\": 5221, \"language\": \"Java\", \"created_date\": \"2020-01-01T00:00:00Z\", \"contributors\": [{\"login\": \"contributor1\", \"files_modified\": [\"src/main.py\", \"tests/test.py\"]}, {\"login\": \"contributor2\", \"files_modified\": [\"src/utils.py\"]}], \"commits\": [{\"sha\": \"abc123\", \"author\": \"contributor1\", \"files\": [\"src/main.py\"]}]}",
+          "output": "False",
+          "metadata_repo_index": 25,
+          "metadata_language": "Go",
+          "metadata_stars": 9122,
+          "metadata_founder_departed": true,
+          "metadata_knowledge_redundancy": 0.56
+        },
+        {
+          "input": "{\"repo_name\": \"sample-repo-26\", \"owner\": \"sample-owner\", \"stars\": 7486, \"language\": \"JavaScript\", \"created_date\": \"2020-01-01T00:00:00Z\", \"contributors\": [{\"login\": \"contributor1\", \"files_modified\": [\"src/main.py\", \"tests/test.py\"]}, {\"login\": \"contributor2\", \"files_modified\": [\"src/utils.py\"]}], \"commits\": [{\"sha\": \"abc123\", \"author\": \"contributor1\", \"files\": [\"src/main.py\"]}]}",
+          "output": "False",
+          "metadata_repo_index": 26,
+          "metadata_language": "Java",
+          "metadata_stars": 5709,
+          "metadata_founder_departed": true,
+          "metadata_knowledge_redundancy": 0.29
+        },
+        {
+          "input": "{\"repo_name\": \"sample-repo-27\", \"owner\": \"sample-owner\", \"stars\": 1387, \"language\": \"Python\", \"created_date\": \"2020-01-01T00:00:00Z\", \"contributors\": [{\"login\": \"contributor1\", \"files_modified\": [\"src/main.py\", \"tests/test.py\"]}, {\"login\": \"contributor2\", \"files_modified\": [\"src/utils.py\"]}], \"commits\": [{\"sha\": \"abc123\", \"author\": \"contributor1\", \"files\": [\"src/main.py\"]}]}",
+          "output": "False",
+          "metadata_repo_index": 27,
+          "metadata_language": "JavaScript",
+          "metadata_stars": 9233,
+          "metadata_founder_departed": false,
+          "metadata_knowledge_redundancy": 0.37
+        },
+        {
+          "input": "{\"repo_name\": \"sample-repo-28\", \"owner\": \"sample-owner\", \"stars\": 7372, \"language\": \"Java\", \"created_date\": \"2020-01-01T00:00:00Z\", \"contributors\": [{\"login\": \"contributor1\", \"files_modified\": [\"src/main.py\", \"tests/test.py\"]}, {\"login\": \"contributor2\", \"files_modified\": [\"src/utils.py\"]}], \"commits\": [{\"sha\": \"abc123\", \"author\": \"contributor1\", \"files\": [\"src/main.py\"]}]}",
+          "output": "True",
+          "metadata_repo_index": 28,
+          "metadata_language": "Java",
+          "metadata_stars": 3776,
+          "metadata_founder_departed": true,
+          "metadata_knowledge_redundancy": 0.63
+        },
+        {
+          "input": "{\"repo_name\": \"sample-repo-29\", \"owner\": \"sample-owner\", \"stars\": 3759, \"language\": \"Python\", \"created_date\": \"2020-01-01T00:00:00Z\", \"contributors\": [{\"login\": \"contributor1\", \"files_modified\": [\"src/main.py\", \"tests/test.py\"]}, {\"login\": \"contributor2\", \"files_modified\": [\"src/utils.py\"]}], \"commits\": [{\"sha\": \"abc123\", \"author\": \"contributor1\", \"files\": [\"src/main.py\"]}]}",
+          "output": "True",
+          "metadata_repo_index": 29,
+          "metadata_language": "Java",
+          "metadata_stars": 357,
+          "metadata_founder_departed": false,
+          "metadata_knowledge_redundancy": 0.54
+        },
+        {
+          "input": "{\"repo_name\": \"sample-repo-30\", \"owner\": \"sample-owner\", \"stars\": 1772, \"language\": \"JavaScript\", \"created_date\": \"2020-01-01T00:00:00Z\", \"contributors\": [{\"login\": \"contributor1\", \"files_modified\": [\"src/main.py\", \"tests/test.py\"]}, {\"login\": \"contributor2\", \"files_modified\": [\"src/utils.py\"]}], \"commits\": [{\"sha\": \"abc123\", \"author\": \"contributor1\", \"files\": [\"src/main.py\"]}]}",
+          "output": "True",
+          "metadata_repo_index": 30,
+          "metadata_language": "Go",
+          "metadata_stars": 7815,
+          "metadata_founder_departed": false,
+          "metadata_knowledge_redundancy": 0.35
+        },
+        {
+          "input": "{\"repo_name\": \"sample-repo-31\", \"owner\": \"sample-owner\", \"stars\": 2450, \"language\": \"Go\", \"created_date\": \"2020-01-01T00:00:00Z\", \"contributors\": [{\"login\": \"contributor1\", \"files_modified\": [\"src/main.py\", \"tests/test.py\"]}, {\"login\": \"contributor2\", \"files_modified\": [\"src/utils.py\"]}], \"commits\": [{\"sha\": \"abc123\", \"author\": \"contributor1\", \"files\": [\"src/main.py\"]}]}",
+          "output": "True",
+          "metadata_repo_index": 31,
+          "metadata_language": "Java",
+          "metadata_stars": 9440,
+          "metadata_founder_departed": false,
+          "metadata_knowledge_redundancy": 0.73
+        },
+        {
+          "input": "{\"repo_name\": \"sample-repo-32\", \"owner\": \"sample-owner\", \"stars\": 4242, \"language\": \"JavaScript\", \"created_date\": \"2020-01-01T00:00:00Z\", \"contributors\": [{\"login\": \"contributor1\", \"files_modified\": [\"src/main.py\", \"tests/test.py\"]}, {\"login\": \"contributor2\", \"files_modified\": [\"src/utils.py\"]}], \"commits\": [{\"sha\": \"abc123\", \"author\": \"contributor1\", \"files\": [\"src/main.py\"]}]}",
+          "output": "False",
+          "metadata_repo_index": 32,
+          "metadata_language": "Java",
+          "metadata_stars": 2777,
+          "metadata_founder_departed": true,
+          "metadata_knowledge_redundancy": 0.58
+        },
+        {
+          "input": "{\"repo_name\": \"sample-repo-33\", \"owner\": \"sample-owner\", \"stars\": 6355, \"language\": \"Python\", \"created_date\": \"2020-01-01T00:00:00Z\", \"contributors\": [{\"login\": \"contributor1\", \"files_modified\": [\"src/main.py\", \"tests/test.py\"]}, {\"login\": \"contributor2\", \"files_modified\": [\"src/utils.py\"]}], \"commits\": [{\"sha\": \"abc123\", \"author\": \"contributor1\", \"files\": [\"src/main.py\"]}]}",
+          "output": "True",
+          "metadata_repo_index": 33,
+          "metadata_language": "Go",
+          "metadata_stars": 4801,
+          "metadata_founder_departed": true,
+          "metadata_knowledge_redundancy": 0.14
+        },
+        {
+          "input": "{\"repo_name\": \"sample-repo-34\", \"owner\": \"sample-owner\", \"stars\": 8140, \"language\": \"Go\", \"created_date\": \"2020-01-01T00:00:00Z\", \"contributors\": [{\"login\": \"contributor1\", \"files_modified\": [\"src/main.py\", \"tests/test.py\"]}, {\"login\": \"contributor2\", \"files_modified\": [\"src/utils.py\"]}], \"commits\": [{\"sha\": \"abc123\", \"author\": \"contributor1\", \"files\": [\"src/main.py\"]}]}",
+          "output": "True",
+          "metadata_repo_index": 34,
+          "metadata_language": "Python",
+          "metadata_stars": 1290,
+          "metadata_founder_departed": true,
+          "metadata_knowledge_redundancy": 0.39
+        },
+        {
+          "input": "{\"repo_name\": \"sample-repo-35\", \"owner\": \"sample-owner\", \"stars\": 4063, \"language\": \"Java\", \"created_date\": \"2020-01-01T00:00:00Z\", \"contributors\": [{\"login\": \"contributor1\", \"files_modified\": [\"src/main.py\", \"tests/test.py\"]}, {\"login\": \"contributor2\", \"files_modified\": [\"src/utils.py\"]}], \"commits\": [{\"sha\": \"abc123\", \"author\": \"contributor1\", \"files\": [\"src/main.py\"]}]}",
+          "output": "False",
+          "metadata_repo_index": 35,
+          "metadata_language": "Python",
+          "metadata_stars": 2140,
+          "metadata_founder_departed": false,
+          "metadata_knowledge_redundancy": 0.38
+        },
+        {
+          "input": "{\"repo_name\": \"sample-repo-36\", \"owner\": \"sample-owner\", \"stars\": 3354, \"language\": \"Java\", \"created_date\": \"2020-01-01T00:00:00Z\", \"contributors\": [{\"login\": \"contributor1\", \"files_modified\": [\"src/main.py\", \"tests/test.py\"]}, {\"login\": \"contributor2\", \"files_modified\": [\"src/utils.py\"]}], \"commits\": [{\"sha\": \"abc123\", \"author\": \"contributor1\", \"files\": [\"src/main.py\"]}]}",
+          "output": "True",
+          "metadata_repo_index": 36,
+          "metadata_language": "JavaScript",
+          "metadata_stars": 7983,
+          "metadata_founder_departed": false,
+          "metadata_knowledge_redundancy": 0.48
+        },
+        {
+          "input": "{\"repo_name\": \"sample-repo-37\", \"owner\": \"sample-owner\", \"stars\": 4578, \"language\": \"Go\", \"created_date\": \"2020-01-01T00:00:00Z\", \"contributors\": [{\"login\": \"contributor1\", \"files_modified\": [\"src/main.py\", \"tests/test.py\"]}, {\"login\": \"contributor2\", \"files_modified\": [\"src/utils.py\"]}], \"commits\": [{\"sha\": \"abc123\", \"author\": \"contributor1\", \"files\": [\"src/main.py\"]}]}",
+          "output": "False",
+          "metadata_repo_index": 37,
+          "metadata_language": "Java",
+          "metadata_stars": 9631,
+          "metadata_founder_departed": false,
+          "metadata_knowledge_redundancy": 0.53
+        },
+        {
+          "input": "{\"repo_name\": \"sample-repo-38\", \"owner\": \"sample-owner\", \"stars\": 3624, \"language\": \"Java\", \"created_date\": \"2020-01-01T00:00:00Z\", \"contributors\": [{\"login\": \"contributor1\", \"files_modified\": [\"src/main.py\", \"tests/test.py\"]}, {\"login\": \"contributor2\", \"files_modified\": [\"src/utils.py\"]}], \"commits\": [{\"sha\": \"abc123\", \"author\": \"contributor1\", \"files\": [\"src/main.py\"]}]}",
+          "output": "True",
+          "metadata_repo_index": 38,
+          "metadata_language": "Go",
+          "metadata_stars": 5814,
+          "metadata_founder_departed": false,
+          "metadata_knowledge_redundancy": 0.4
+        },
+        {
+          "input": "{\"repo_name\": \"sample-repo-39\", \"owner\": \"sample-owner\", \"stars\": 1923, \"language\": \"Go\", \"created_date\": \"2020-01-01T00:00:00Z\", \"contributors\": [{\"login\": \"contributor1\", \"files_modified\": [\"src/main.py\", \"tests/test.py\"]}, {\"login\": \"contributor2\", \"files_modified\": [\"src/utils.py\"]}], \"commits\": [{\"sha\": \"abc123\", \"author\": \"contributor1\", \"files\": [\"src/main.py\"]}]}",
+          "output": "True",
+          "metadata_repo_index": 39,
+          "metadata_language": "Java",
+          "metadata_stars": 1094,
+          "metadata_founder_departed": true,
+          "metadata_knowledge_redundancy": 0.31
+        },
+        {
+          "input": "{\"repo_name\": \"sample-repo-40\", \"owner\": \"sample-owner\", \"stars\": 6537, \"language\": \"Go\", \"created_date\": \"2020-01-01T00:00:00Z\", \"contributors\": [{\"login\": \"contributor1\", \"files_modified\": [\"src/main.py\", \"tests/test.py\"]}, {\"login\": \"contributor2\", \"files_modified\": [\"src/utils.py\"]}], \"commits\": [{\"sha\": \"abc123\", \"author\": \"contributor1\", \"files\": [\"src/main.py\"]}]}",
+          "output": "False",
+          "metadata_repo_index": 40,
+          "metadata_language": "Java",
+          "metadata_stars": 7557,
+          "metadata_founder_departed": false,
+          "metadata_knowledge_redundancy": 0.48
+        },
+        {
+          "input": "{\"repo_name\": \"sample-repo-41\", \"owner\": \"sample-owner\", \"stars\": 1825, \"language\": \"JavaScript\", \"created_date\": \"2020-01-01T00:00:00Z\", \"contributors\": [{\"login\": \"contributor1\", \"files_modified\": [\"src/main.py\", \"tests/test.py\"]}, {\"login\": \"contributor2\", \"files_modified\": [\"src/utils.py\"]}], \"commits\": [{\"sha\": \"abc123\", \"author\": \"contributor1\", \"files\": [\"src/main.py\"]}]}",
+          "output": "True",
+          "metadata_repo_index": 41,
+          "metadata_language": "JavaScript",
+          "metadata_stars": 4171,
+          "metadata_founder_departed": true,
+          "metadata_knowledge_redundancy": 0.46
+        },
+        {
+          "input": "{\"repo_name\": \"sample-repo-42\", \"owner\": \"sample-owner\", \"stars\": 2776, \"language\": \"Go\", \"created_date\": \"2020-01-01T00:00:00Z\", \"contributors\": [{\"login\": \"contributor1\", \"files_modified\": [\"src/main.py\", \"tests/test.py\"]}, {\"login\": \"contributor2\", \"files_modified\": [\"src/utils.py\"]}], \"commits\": [{\"sha\": \"abc123\", \"author\": \"contributor1\", \"files\": [\"src/main.py\"]}]}",
+          "output": "False",
+          "metadata_repo_index": 42,
+          "metadata_language": "Java",
+          "metadata_stars": 3379,
+          "metadata_founder_departed": false,
+          "metadata_knowledge_redundancy": 0.8
+        },
+        {
+          "input": "{\"repo_name\": \"sample-repo-43\", \"owner\": \"sample-owner\", \"stars\": 399, \"language\": \"Java\", \"created_date\": \"2020-01-01T00:00:00Z\", \"contributors\": [{\"login\": \"contributor1\", \"files_modified\": [\"src/main.py\", \"tests/test.py\"]}, {\"login\": \"contributor2\", \"files_modified\": [\"src/utils.py\"]}], \"commits\": [{\"sha\": \"abc123\", \"author\": \"contributor1\", \"files\": [\"src/main.py\"]}]}",
+          "output": "False",
+          "metadata_repo_index": 43,
+          "metadata_language": "Java",
+          "metadata_stars": 8639,
+          "metadata_founder_departed": true,
+          "metadata_knowledge_redundancy": 0.31
+        },
+        {
+          "input": "{\"repo_name\": \"sample-repo-44\", \"owner\": \"sample-owner\", \"stars\": 9417, \"language\": \"Python\", \"created_date\": \"2020-01-01T00:00:00Z\", \"contributors\": [{\"login\": \"contributor1\", \"files_modified\": [\"src/main.py\", \"tests/test.py\"]}, {\"login\": \"contributor2\", \"files_modified\": [\"src/utils.py\"]}], \"commits\": [{\"sha\": \"abc123\", \"author\": \"contributor1\", \"files\": [\"src/main.py\"]}]}",
+          "output": "True",
+          "metadata_repo_index": 44,
+          "metadata_language": "Java",
+          "metadata_stars": 9143,
+          "metadata_founder_departed": true,
+          "metadata_knowledge_redundancy": 0.69
+        },
+        {
+          "input": "{\"repo_name\": \"sample-repo-45\", \"owner\": \"sample-owner\", \"stars\": 3412, \"language\": \"Go\", \"created_date\": \"2020-01-01T00:00:00Z\", \"contributors\": [{\"login\": \"contributor1\", \"files_modified\": [\"src/main.py\", \"tests/test.py\"]}, {\"login\": \"contributor2\", \"files_modified\": [\"src/utils.py\"]}], \"commits\": [{\"sha\": \"abc123\", \"author\": \"contributor1\", \"files\": [\"src/main.py\"]}]}",
+          "output": "False",
+          "metadata_repo_index": 45,
+          "metadata_language": "Python",
+          "metadata_stars": 1027,
+          "metadata_founder_departed": false,
+          "metadata_knowledge_redundancy": 0.86
+        },
+        {
+          "input": "{\"repo_name\": \"sample-repo-46\", \"owner\": \"sample-owner\", \"stars\": 3863, \"language\": \"Java\", \"created_date\": \"2020-01-01T00:00:00Z\", \"contributors\": [{\"login\": \"contributor1\", \"files_modified\": [\"src/main.py\", \"tests/test.py\"]}, {\"login\": \"contributor2\", \"files_modified\": [\"src/utils.py\"]}], \"commits\": [{\"sha\": \"abc123\", \"author\": \"contributor1\", \"files\": [\"src/main.py\"]}]}",
+          "output": "False",
+          "metadata_repo_index": 46,
+          "metadata_language": "Python",
+          "metadata_stars": 4982,
+          "metadata_founder_departed": false,
+          "metadata_knowledge_redundancy": 0.79
+        },
+        {
+          "input": "{\"repo_name\": \"sample-repo-47\", \"owner\": \"sample-owner\", \"stars\": 4508, \"language\": \"JavaScript\", \"created_date\": \"2020-01-01T00:00:00Z\", \"contributors\": [{\"login\": \"contributor1\", \"files_modified\": [\"src/main.py\", \"tests/test.py\"]}, {\"login\": \"contributor2\", \"files_modified\": [\"src/utils.py\"]}], \"commits\": [{\"sha\": \"abc123\", \"author\": \"contributor1\", \"files\": [\"src/main.py\"]}]}",
+          "output": "False",
+          "metadata_repo_index": 47,
+          "metadata_language": "Python",
+          "metadata_stars": 7508,
+          "metadata_founder_departed": false,
+          "metadata_knowledge_redundancy": 0.1
+        },
+        {
+          "input": "{\"repo_name\": \"sample-repo-48\", \"owner\": \"sample-owner\", \"stars\": 3600, \"language\": \"Python\", \"created_date\": \"2020-01-01T00:00:00Z\", \"contributors\": [{\"login\": \"contributor1\", \"files_modified\": [\"src/main.py\", \"tests/test.py\"]}, {\"login\": \"contributor2\", \"files_modified\": [\"src/utils.py\"]}], \"commits\": [{\"sha\": \"abc123\", \"author\": \"contributor1\", \"files\": [\"src/main.py\"]}]}",
+          "output": "True",
+          "metadata_repo_index": 48,
+          "metadata_language": "Python",
+          "metadata_stars": 1852,
+          "metadata_founder_departed": true,
+          "metadata_knowledge_redundancy": 0.31
+        },
+        {
+          "input": "{\"repo_name\": \"sample-repo-49\", \"owner\": \"sample-owner\", \"stars\": 9678, \"language\": \"JavaScript\", \"created_date\": \"2020-01-01T00:00:00Z\", \"contributors\": [{\"login\": \"contributor1\", \"files_modified\": [\"src/main.py\", \"tests/test.py\"]}, {\"login\": \"contributor2\", \"files_modified\": [\"src/utils.py\"]}], \"commits\": [{\"sha\": \"abc123\", \"author\": \"contributor1\", \"files\": [\"src/main.py\"]}]}",
+          "output": "False",
+          "metadata_repo_index": 49,
+          "metadata_language": "Go",
+          "metadata_stars": 8847,
+          "metadata_founder_departed": false,
+          "metadata_knowledge_redundancy": 0.31
+        },
+        {
+          "input": "{\"repo_name\": \"sample-repo-50\", \"owner\": \"sample-owner\", \"stars\": 8126, \"language\": \"Java\", \"created_date\": \"2020-01-01T00:00:00Z\", \"contributors\": [{\"login\": \"contributor1\", \"files_modified\": [\"src/main.py\", \"tests/test.py\"]}, {\"login\": \"contributor2\", \"files_modified\": [\"src/utils.py\"]}], \"commits\": [{\"sha\": \"abc123\", \"author\": \"contributor1\", \"files\": [\"src/main.py\"]}]}",
+          "output": "False",
+          "metadata_repo_index": 50,
+          "metadata_language": "JavaScript",
+          "metadata_stars": 5462,
+          "metadata_founder_departed": true,
+          "metadata_knowledge_redundancy": 0.37
+        }
+      ]
+    }
+  ]
+}

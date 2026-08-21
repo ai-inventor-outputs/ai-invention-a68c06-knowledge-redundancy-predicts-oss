@@ -1,0 +1,36 @@
+{
+  "datasets": [
+    {
+      "dataset": "github_oss_survival",
+      "examples": [
+        {
+          "input": "{\"repo_name\": \"sample-repo-1\", \"owner\": \"sample-owner\", \"stars\": 2191, \"language\": \"JavaScript\", \"created_date\": \"2020-01-01T00:00:00Z\", \"contributors\": [{\"login\": \"contributor1\", \"files_modified\": [\"src/main.py\", \"tests/test.py\"]}, {\"login\": \"contributor2\", \"files_modified\": [\"src/utils.py\"]}], \"commits\": [{\"sha\": \"abc123\", \"author\": \"contributor1\", \"files\": [\"src/main.py\"]}]}",
+          "output": "True",
+          "metadata_repo_index": 1,
+          "metadata_language": "Go",
+          "metadata_stars": 7508,
+          "metadata_founder_departed": true,
+          "metadata_knowledge_redundancy": 0.34
+        },
+        {
+          "input": "{\"repo_name\": \"sample-repo-2\", \"owner\": \"sample-owner\", \"stars\": 1386, \"language\": \"Java\", \"created_date\": \"2020-01-01T00:00:00Z\", \"contributors\": [{\"login\": \"contributor1\", \"files_modified\": [\"src/main.py\", \"tests/test.py\"]}, {\"login\": \"contributor2\", \"files_modified\": [\"src/utils.py\"]}], \"commits\": [{\"sha\": \"abc123\", \"author\": \"contributor1\", \"files\": [\"src/main.py\"]}]}",
+          "output": "True",
+          "metadata_repo_index": 2,
+          "metadata_language": "Java",
+          "metadata_stars": 2269,
+          "metadata_founder_departed": true,
+          "metadata_knowledge_redundancy": 0.17
+        },
+        {
+          "input": "{\"repo_name\": \"sample-repo-3\", \"owner\": \"sample-owner\", \"stars\": 6427, \"language\": \"Java\", \"created_date\": \"2020-01-01T00:00:00Z\", \"contributors\": [{\"login\": \"contributor1\", \"files_modified\": [\"src/main.py\", \"tests/test.py\"]}, {\"login\": \"contributor2\", \"files_modified\": [\"src/utils.py\"]}], \"commits\": [{\"sha\": \"abc123\", \"author\": \"contributor1\", \"files\": [\"src/main.py\"]}]}",
+          "output": "True",
+          "metadata_repo_index": 3,
+          "metadata_language": "Java",
+          "metadata_stars": 5064,
+          "metadata_founder_departed": true,
+          "metadata_knowledge_redundancy": 0.26
+        }
+      ]
+    }
+  ]
+}

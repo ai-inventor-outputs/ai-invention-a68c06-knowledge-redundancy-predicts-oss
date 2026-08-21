@@ -1,0 +1,42 @@
+{
+  "datasets": [
+    {
+      "dataset": "github_oss_survival",
+      "examples": [
+        {
+          "input": "{\"knowledge_redundancy_score\": 0.26705976741823034, \"stars\": 304, \"total_commits\": 1255, \"top_contributors_count\": 3, \"pre_departure_commits_per_month\": 23.41178035410031}",
+          "output": "survived",
+          "metadata_repo_id": "org/repo-1",
+          "metadata_has_departure": true,
+          "metadata_KR": 0.26705976741823034,
+          "metadata_T": 12.0,
+          "metadata_E": 0,
+          "predict_linear_survival": "{\"survival_probability_at_12\": null}",
+          "predict_quadratic_survival": "{\"survival_probability_at_12\": null}"
+        },
+        {
+          "input": "{\"knowledge_redundancy_score\": 0.285414378610915, \"stars\": 158, \"total_commits\": 1820, \"top_contributors_count\": 5, \"pre_departure_commits_per_month\": 10.72354459527886}",
+          "output": "survived",
+          "metadata_repo_id": "org/repo-2",
+          "metadata_has_departure": true,
+          "metadata_KR": 0.285414378610915,
+          "metadata_T": 12.0,
+          "metadata_E": 0,
+          "predict_linear_survival": "{\"survival_probability_at_12\": null}",
+          "predict_quadratic_survival": "{\"survival_probability_at_12\": null}"
+        },
+        {
+          "input": "{\"knowledge_redundancy_score\": 0.3950057084440945, \"stars\": 2386, \"total_commits\": 566, \"top_contributors_count\": 3, \"pre_departure_commits_per_month\": 21.98795295900659}",
+          "output": "survived",
+          "metadata_repo_id": "org/repo-3",
+          "metadata_has_departure": true,
+          "metadata_KR": 0.3950057084440945,
+          "metadata_T": 12.0,
+          "metadata_E": 0,
+          "predict_linear_survival": "{\"survival_probability_at_12\": null}",
+          "predict_quadratic_survival": "{\"survival_probability_at_12\": null}"
+        }
+      ]
+    }
+  ]
+}
